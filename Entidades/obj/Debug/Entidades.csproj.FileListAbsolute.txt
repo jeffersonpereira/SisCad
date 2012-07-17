@@ -1,0 +1,8 @@
+C:\Sistemas\Poco\AppPoco\Entidades\bin\Debug\Entidades.dll
+C:\Sistemas\Poco\AppPoco\Entidades\bin\Debug\Entidades.pdb
+C:\Sistemas\Poco\AppPoco\Entidades\obj\Debug\Entidades.dll
+C:\Sistemas\Poco\AppPoco\Entidades\obj\Debug\Entidades.pdb
+D:\Códigos Fontes\SisCad\Entidades\bin\Debug\Entidades.dll
+D:\Códigos Fontes\SisCad\Entidades\bin\Debug\Entidades.pdb
+D:\Códigos Fontes\SisCad\Entidades\obj\Debug\Entidades.dll
+D:\Códigos Fontes\SisCad\Entidades\obj\Debug\Entidades.pdb
