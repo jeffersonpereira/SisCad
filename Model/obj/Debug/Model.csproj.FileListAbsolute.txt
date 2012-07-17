@@ -1,0 +1,16 @@
+C:\Sistemas\Poco\AppPoco\Model\bin\Debug\Model.dll.config
+C:\Sistemas\Poco\AppPoco\Model\bin\Debug\Model.dll
+C:\Sistemas\Poco\AppPoco\Model\bin\Debug\Model.pdb
+C:\Sistemas\Poco\AppPoco\Model\obj\Debug\Model.dll
+C:\Sistemas\Poco\AppPoco\Model\obj\Debug\Model.pdb
+C:\Sistemas\Poco\AppPoco\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+C:\Sistemas\Poco\AppPoco\Model\bin\Debug\Entidades.dll
+C:\Sistemas\Poco\AppPoco\Model\bin\Debug\Entidades.pdb
+D:\Códigos Fontes\SisCad\Model\bin\Debug\Model.dll.config
+D:\Códigos Fontes\SisCad\Model\bin\Debug\Model.dll
+D:\Códigos Fontes\SisCad\Model\bin\Debug\Model.pdb
+D:\Códigos Fontes\SisCad\Model\bin\Debug\Entidades.dll
+D:\Códigos Fontes\SisCad\Model\bin\Debug\Entidades.pdb
+D:\Códigos Fontes\SisCad\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+D:\Códigos Fontes\SisCad\Model\obj\Debug\Model.dll
+D:\Códigos Fontes\SisCad\Model\obj\Debug\Model.pdb

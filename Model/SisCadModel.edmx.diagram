@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3b3570c5d4c140d99f17e3b03a605a3a" Name="Diagram1">
+        <EntityTypeShape EntityType="SisCadModel.cargo" Width="1.5" PointX="3" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="SisCadModel.centro_custo" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SisCadModel.departamento" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SisCadModel.dependente" Width="1.5" PointX="7.5" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SisCadModel.empresa" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SisCadModel.ferias" Width="1.5" PointX="7.5" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SisCadModel.funcionario" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SisCadModel.gestor" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SisCadModel.movimentacao" Width="1.5" PointX="7.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SisCadModel.municipio" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SisCadModel.setor" Width="1.5" PointX="3" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SisCadModel.usuario" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="SisCadModel.fk_cargo_atual_to_funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="SisCadModel.fk_cargo_contratado_to_funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="SisCadModel.fk_centro_custo_to_setor" ManuallyRouted="false" />
+        <AssociationConnector Association="SisCadModel.fk_departamento_to_setor" ManuallyRouted="false" />
+        <AssociationConnector Association="SisCadModel.fk_funcionario_to_dependente" ManuallyRouted="false" />
+        <AssociationConnector Association="SisCadModel.fk_empresa_to_funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="SisCadModel.fk_gestor_to_empresa" ManuallyRouted="false" />
+        <AssociationConnector Association="SisCadModel.fk_municipio_to_empresa" ManuallyRouted="false" />
+        <AssociationConnector Association="SisCadModel.fk_funcionario_to_ferias" ManuallyRouted="false" />
+        <AssociationConnector Association="SisCadModel.fk_funcionario_to_movimentacao" ManuallyRouted="false" />
+        <AssociationConnector Association="SisCadModel.fk_municipio_naturalidade_to_funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="SisCadModel.fk_municipio_to_funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="SisCadModel.fk_setor_to_funcionario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
