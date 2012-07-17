@@ -1,0 +1,10 @@
+C:\Sistemas\SisCad\SisCad\bin\Debug\SisCadLibrary.dll
+C:\Sistemas\SisCad\SisCad\bin\Debug\SisCadLibrary.pdb
+C:\Sistemas\SisCad\SisCad\obj\Debug\SisCadLibrary.dll
+C:\Sistemas\SisCad\SisCad\obj\Debug\SisCadLibrary.pdb
+C:\Sistemas\SisCad\SisCad\obj\Debug\SisCadLibrary.csprojResolveAssemblyReference.cache
+D:\Códigos Fontes\SisCad\SisCad\bin\Debug\SisCadLibrary.dll
+D:\Códigos Fontes\SisCad\SisCad\bin\Debug\SisCadLibrary.pdb
+D:\Códigos Fontes\SisCad\SisCad\obj\Debug\SisCadLibrary.csprojResolveAssemblyReference.cache
+D:\Códigos Fontes\SisCad\SisCad\obj\Debug\SisCadLibrary.dll
+D:\Códigos Fontes\SisCad\SisCad\obj\Debug\SisCadLibrary.pdb

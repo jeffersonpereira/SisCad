@@ -1,0 +1,5 @@
+C:\Sistemas\SisCad\SisCad\bin\Debug\SisCadLibrary.dll
+C:\Sistemas\SisCad\SisCad\bin\Debug\SisCadLibrary.pdb
+C:\Sistemas\SisCad\SisCad\obj\Debug\ResolveAssemblyReference.cache
+C:\Sistemas\SisCad\SisCad\obj\Debug\SisCadLibrary.dll
+C:\Sistemas\SisCad\SisCad\obj\Debug\SisCadLibrary.pdb
