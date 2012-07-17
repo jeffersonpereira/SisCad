@@ -1,0 +1,55 @@
+C:\Sistemas\SisCad Form\SisCad\bin\Debug\SisCad.exe
+C:\Sistemas\SisCad Form\SisCad\bin\Debug\SisCad.pdb
+C:\Sistemas\SisCad Form\SisCad\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Sistemas\SisCad Form\SisCad\obj\x86\Debug\SisCad.Properties.Resources.resources
+C:\Sistemas\SisCad Form\SisCad\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Sistemas\SisCad Form\SisCad\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Sistemas\SisCad Form\SisCad\obj\x86\Debug\SisCad.exe
+C:\Sistemas\SisCad Form\SisCad\obj\x86\Debug\SisCad.pdb
+C:\Sistemas\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmPrincipal.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.exe
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.pdb
+C:\Sistemas\SisCad\SisCad Form\SisCad\bin\Debug\SisCad.exe
+C:\Sistemas\SisCad\SisCad Form\SisCad\bin\Debug\SisCad.pdb
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmDepartamento.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmPrincipal.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Properties.Resources.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\bin\Debug\SisCadLibrary.dll
+C:\Sistemas\SisCad\SisCad Form\SisCad\bin\Debug\SisCadLibrary.pdb
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.csprojResolveAssemblyReference.cache
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.csproj.GenerateResource.Cache
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.FormBase.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmSetor.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.PesquisaMunicipio.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.Lookup.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmEmpresa.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmResponsavel.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmCentroCusto.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmFerias.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmFuncionario.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmMunicipioPopup.resources
+C:\Sistemas\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.frmBase.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.exe
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.pdb
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\bin\Debug\SisCad.exe
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\bin\Debug\SisCad.pdb
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.csprojResolveAssemblyReference.cache
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmCentroCusto.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmDepartamento.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmEmpresa.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmFerias.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmFuncionario.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmMunicipioPopup.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmPrincipal.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmResponsavel.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.frmSetor.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.Lookup.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Forms.PesquisaMunicipio.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.frmBase.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.Properties.Resources.resources
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\obj\x86\Debug\SisCad.csproj.GenerateResource.Cache
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\bin\Debug\Model.dll
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\bin\Debug\Entidades.dll
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\bin\Debug\Model.pdb
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\bin\Debug\Entidades.pdb
+D:\Códigos Fontes\SisCad\SisCad Form\SisCad\bin\Debug\SisCad.exe.config

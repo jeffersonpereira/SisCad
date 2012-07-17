@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SisCadModelStoreContainer" CdmEntityContainer="SisCadEntities">
+    <EntitySetMapping Name="categoria">
+      <EntityTypeMapping TypeName="SisCadModel.categoria">
+        <MappingFragment StoreEntitySet="categoria">
+          <ScalarProperty Name="categoria_id" ColumnName="categoria_id" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="concurso">
+      <EntityTypeMapping TypeName="SisCadModel.concurso">
+        <MappingFragment StoreEntitySet="concurso">
+          <ScalarProperty Name="concurso_id" ColumnName="concurso_id" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="edita" ColumnName="edita" />
+          <ScalarProperty Name="data_edital" ColumnName="data_edital" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="departamento">
+      <EntityTypeMapping TypeName="SisCadModel.departamento">
+        <MappingFragment StoreEntitySet="departamento">
+          <ScalarProperty Name="departamento_id" ColumnName="departamento_id" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ferias">
+      <EntityTypeMapping TypeName="SisCadModel.ferias">
+        <MappingFragment StoreEntitySet="ferias">
+          <ScalarProperty Name="ferias_id" ColumnName="ferias_id" />
+          <ScalarProperty Name="inicio_aquisitivo" ColumnName="inicio_aquisitivo" />
+          <ScalarProperty Name="fim_aquisitivo" ColumnName="fim_aquisitivo" />
+          <ScalarProperty Name="inicio_gozo" ColumnName="inicio_gozo" />
+          <ScalarProperty Name="fim_gozo" ColumnName="fim_gozo" />
+          <ScalarProperty Name="abono" ColumnName="abono" />
+          <ScalarProperty Name="funcionario_dados_id" ColumnName="funcionario_dados_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="funcionario">
+      <EntityTypeMapping TypeName="SisCadModel.funcionario">
+        <MappingFragment StoreEntitySet="funcionario">
+          <ScalarProperty Name="funcionario_id" ColumnName="funcionario_id" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="matricula" ColumnName="matricula" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="funcionario_dados">
+      <EntityTypeMapping TypeName="SisCadModel.funcionario_dados">
+        <MappingFragment StoreEntitySet="funcionario_dados">
+          <ScalarProperty Name="funcionario_dados_id" ColumnName="funcionario_dados_id" />
+          <ScalarProperty Name="funcionario_id" ColumnName="funcionario_id" />
+          <ScalarProperty Name="exercicio" ColumnName="exercicio" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="data_nascimento" ColumnName="data_nascimento" />
+          <ScalarProperty Name="sexo" ColumnName="sexo" />
+          <ScalarProperty Name="rg" ColumnName="rg" />
+          <ScalarProperty Name="pis" ColumnName="pis" />
+          <ScalarProperty Name="cpf" ColumnName="cpf" />
+          <ScalarProperty Name="data_admissao" ColumnName="data_admissao" />
+          <ScalarProperty Name="pai" ColumnName="pai" />
+          <ScalarProperty Name="mae" ColumnName="mae" />
+          <ScalarProperty Name="titulo_eleitoral" ColumnName="titulo_eleitoral" />
+          <ScalarProperty Name="reservista" ColumnName="reservista" />
+          <ScalarProperty Name="deficiente" ColumnName="deficiente" />
+          <ScalarProperty Name="salario" ColumnName="salario" />
+          <ScalarProperty Name="data_aposentadoria" ColumnName="data_aposentadoria" />
+          <ScalarProperty Name="numero_cnh" ColumnName="numero_cnh" />
+          <ScalarProperty Name="categoria_cnh" ColumnName="categoria_cnh" />
+          <ScalarProperty Name="numero_conta_bancaria" ColumnName="numero_conta_bancaria" />
+          <ScalarProperty Name="numero_conta_fgts" ColumnName="numero_conta_fgts" />
+          <ScalarProperty Name="agencia_conta_fgts" ColumnName="agencia_conta_fgts" />
+          <ScalarProperty Name="dac_numero_conta_fgts" ColumnName="dac_numero_conta_fgts" />
+          <ScalarProperty Name="dac_agencia_conta_fgts" ColumnName="dac_agencia_conta_fgts" />
+          <ScalarProperty Name="agencia_conta_bancaria" ColumnName="agencia_conta_bancaria" />
+          <ScalarProperty Name="dac_numero_conta_bancaria" ColumnName="dac_numero_conta_bancaria" />
+          <ScalarProperty Name="dac_agencia_conta_bancaria" ColumnName="dac_agencia_conta_bancaria" />
+          <ScalarProperty Name="tipo_conta_bancaria" ColumnName="tipo_conta_bancaria" />
+          <ScalarProperty Name="endereco" ColumnName="endereco" />
+          <ScalarProperty Name="bairro" ColumnName="bairro" />
+          <ScalarProperty Name="complemento" ColumnName="complemento" />
+          <ScalarProperty Name="cep" ColumnName="cep" />
+          <ScalarProperty Name="telefone" ColumnName="telefone" />
+          <ScalarProperty Name="fax" ColumnName="fax" />
+          <ScalarProperty Name="ramal" ColumnName="ramal" />
+          <ScalarProperty Name="celular" ColumnName="celular" />
+          <ScalarProperty Name="cor" ColumnName="cor" />
+          <ScalarProperty Name="estado_civil" ColumnName="estado_civil" />
+          <ScalarProperty Name="horas_trabalho" ColumnName="horas_trabalho" />
+          <ScalarProperty Name="carteira_trabalho" ColumnName="carteira_trabalho" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="tipo_admissao" ColumnName="tipo_admissao" />
+          <ScalarProperty Name="data_admissao_transferencia" ColumnName="data_admissao_transferencia" />
+          <ScalarProperty Name="salario_adicional" ColumnName="salario_adicional" />
+          <ScalarProperty Name="tipo_teto_salarial" ColumnName="tipo_teto_salarial" />
+          <ScalarProperty Name="tipo_cabelo" ColumnName="tipo_cabelo" />
+          <ScalarProperty Name="altura" ColumnName="altura" />
+          <ScalarProperty Name="peso" ColumnName="peso" />
+          <ScalarProperty Name="tipo_olhos" ColumnName="tipo_olhos" />
+          <ScalarProperty Name="sinais" ColumnName="sinais" />
+          <ScalarProperty Name="rg_orgao" ColumnName="rg_orgao" />
+          <ScalarProperty Name="rg_emissao" ColumnName="rg_emissao" />
+          <ScalarProperty Name="titulo_secao" ColumnName="titulo_secao" />
+          <ScalarProperty Name="titulo_zona" ColumnName="titulo_zona" />
+          <ScalarProperty Name="ctps_rural" ColumnName="ctps_rural" />
+          <ScalarProperty Name="ctps_serie" ColumnName="ctps_serie" />
+          <ScalarProperty Name="carteira_trabalho_serie" ColumnName="carteira_trabalho_serie" />
+          <ScalarProperty Name="carteira_trabalho_uf" ColumnName="carteira_trabalho_uf" />
+          <ScalarProperty Name="validade_cnh" ColumnName="validade_cnh" />
+          <ScalarProperty Name="carteira_exterior" ColumnName="carteira_exterior" />
+          <ScalarProperty Name="rg_exterior" ColumnName="rg_exterior" />
+          <ScalarProperty Name="quantidade_filhos_brasil" ColumnName="quantidade_filhos_brasil" />
+          <ScalarProperty Name="data_chegada_brasil" ColumnName="data_chegada_brasil" />
+          <ScalarProperty Name="pais_naturalizado" ColumnName="pais_naturalizado" />
+          <ScalarProperty Name="decreto_naturalizacao" ColumnName="decreto_naturalizacao" />
+          <ScalarProperty Name="casado_com_brasileiro" ColumnName="casado_com_brasileiro" />
+          <ScalarProperty Name="conjuge" ColumnName="conjuge" />
+          <ScalarProperty Name="optante_fgts" ColumnName="optante_fgts" />
+          <ScalarProperty Name="data_opcao_fgts" ColumnName="data_opcao_fgts" />
+          <ScalarProperty Name="data_retratacao_fgts" ColumnName="data_retratacao_fgts" />
+          <ScalarProperty Name="data_pis" ColumnName="data_pis" />
+          <ScalarProperty Name="categoria_id" ColumnName="categoria_id" />
+          <ScalarProperty Name="concurso_id" ColumnName="concurso_id" />
+          <ScalarProperty Name="setor_id" ColumnName="setor_id" />
+          <ScalarProperty Name="municipio_id" ColumnName="municipio_id" />
+          <ScalarProperty Name="vinculo_id" ColumnName="vinculo_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="municipio">
+      <EntityTypeMapping TypeName="SisCadModel.municipio">
+        <MappingFragment StoreEntitySet="municipio">
+          <ScalarProperty Name="municipio_id" ColumnName="municipio_id" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="uf" ColumnName="uf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="setor">
+      <EntityTypeMapping TypeName="SisCadModel.setor">
+        <MappingFragment StoreEntitySet="setor">
+          <ScalarProperty Name="setor_id" ColumnName="setor_id" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+          <ScalarProperty Name="departamento_id" ColumnName="departamento_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vinculo">
+      <EntityTypeMapping TypeName="SisCadModel.vinculo">
+        <MappingFragment StoreEntitySet="vinculo">
+          <ScalarProperty Name="vinculo_id" ColumnName="vinculo_id" />
+          <ScalarProperty Name="descricao" ColumnName="descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

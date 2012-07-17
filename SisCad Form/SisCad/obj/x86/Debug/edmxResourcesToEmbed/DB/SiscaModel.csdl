@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SisCadModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="SisCadEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categoria" EntityType="SisCadModel.categoria" />
+    <EntitySet Name="concurso" EntityType="SisCadModel.concurso" />
+    <EntitySet Name="departamento" EntityType="SisCadModel.departamento" />
+    <EntitySet Name="ferias" EntityType="SisCadModel.ferias" />
+    <EntitySet Name="funcionario" EntityType="SisCadModel.funcionario" />
+    <EntitySet Name="funcionario_dados" EntityType="SisCadModel.funcionario_dados" />
+    <EntitySet Name="municipio" EntityType="SisCadModel.municipio" />
+    <EntitySet Name="setor" EntityType="SisCadModel.setor" />
+    <EntitySet Name="vinculo" EntityType="SisCadModel.vinculo" />
+    <AssociationSet Name="categoria_to_funcionario" Association="SisCadModel.categoria_to_funcionario">
+      <End Role="categoria" EntitySet="categoria" />
+      <End Role="funcionario_dados" EntitySet="funcionario_dados" />
+    </AssociationSet>
+    <AssociationSet Name="concurso_funcionario_dados" Association="SisCadModel.concurso_funcionario_dados">
+      <End Role="concurso" EntitySet="concurso" />
+      <End Role="funcionario_dados" EntitySet="funcionario_dados" />
+    </AssociationSet>
+    <AssociationSet Name="fk_departamento_to_setor" Association="SisCadModel.fk_departamento_to_setor">
+      <End Role="departamento" EntitySet="departamento" />
+      <End Role="setor" EntitySet="setor" />
+    </AssociationSet>
+    <AssociationSet Name="ferias_to_funcionario" Association="SisCadModel.ferias_to_funcionario">
+      <End Role="funcionario_dados" EntitySet="funcionario_dados" />
+      <End Role="ferias" EntitySet="ferias" />
+    </AssociationSet>
+    <AssociationSet Name="fk_funcionario_to_funcionario_dados" Association="SisCadModel.fk_funcionario_to_funcionario_dados">
+      <End Role="funcionario" EntitySet="funcionario" />
+      <End Role="funcionario_dados" EntitySet="funcionario_dados" />
+    </AssociationSet>
+    <AssociationSet Name="fk_municipio_to_funcionario" Association="SisCadModel.fk_municipio_to_funcionario">
+      <End Role="municipio" EntitySet="municipio" />
+      <End Role="funcionario_dados" EntitySet="funcionario_dados" />
+    </AssociationSet>
+    <AssociationSet Name="setor_to_funcionario" Association="SisCadModel.setor_to_funcionario">
+      <End Role="setor" EntitySet="setor" />
+      <End Role="funcionario_dados" EntitySet="funcionario_dados" />
+    </AssociationSet>
+    <AssociationSet Name="vinculo_funcionario_dados" Association="SisCadModel.vinculo_funcionario_dados">
+      <End Role="vinculo" EntitySet="vinculo" />
+      <End Role="funcionario_dados" EntitySet="funcionario_dados" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="categoria">
+    <Key>
+      <PropertyRef Name="categoria_id" />
+    </Key>
+    <Property Name="categoria_id" Type="Int32" Nullable="false" />
+    <Property Name="descricao" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="funcionario_dados" Relationship="SisCadModel.categoria_to_funcionario" FromRole="categoria" ToRole="funcionario_dados" />
+  </EntityType>
+  <EntityType Name="concurso">
+    <Key>
+      <PropertyRef Name="concurso_id" />
+    </Key>
+    <Property Name="concurso_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descricao" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="edita" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+    <Property Name="data_edital" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="funcionario_dados" Relationship="SisCadModel.concurso_funcionario_dados" FromRole="concurso" ToRole="funcionario_dados" />
+  </EntityType>
+  <EntityType Name="departamento">
+    <Key>
+      <PropertyRef Name="departamento_id" />
+    </Key>
+    <Property Name="departamento_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descricao" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="setor" Relationship="SisCadModel.fk_departamento_to_setor" FromRole="departamento" ToRole="setor" />
+  </EntityType>
+  <EntityType Name="ferias">
+    <Key>
+      <PropertyRef Name="ferias_id" />
+    </Key>
+    <Property Name="ferias_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="inicio_aquisitivo" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fim_aquisitivo" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="inicio_gozo" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fim_gozo" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="abono" Type="Boolean" Nullable="false" />
+    <Property Name="funcionario_dados_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="funcionario_dados" Relationship="SisCadModel.ferias_to_funcionario" FromRole="ferias" ToRole="funcionario_dados" />
+  </EntityType>
+  <EntityType Name="funcionario">
+    <Key>
+      <PropertyRef Name="funcionario_id" />
+    </Key>
+    <Property Name="funcionario_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="codigo" Type="Int32" Nullable="false" />
+    <Property Name="matricula" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="funcionario_dados" Relationship="SisCadModel.fk_funcionario_to_funcionario_dados" FromRole="funcionario" ToRole="funcionario_dados" />
+  </EntityType>
+  <EntityType Name="funcionario_dados">
+    <Key>
+      <PropertyRef Name="funcionario_dados_id" />
+    </Key>
+    <Property Name="funcionario_dados_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="funcionario_id" Type="Int32" Nullable="false" />
+    <Property Name="exercicio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="nome" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="data_nascimento" Type="DateTime" Precision="3" />
+    <Property Name="sexo" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="rg" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="pis" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="cpf" Type="String" MaxLength="11" Unicode="false" FixedLength="false" />
+    <Property Name="data_admissao" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="pai" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="mae" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="titulo_eleitoral" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="reservista" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="deficiente" Type="Int32" Nullable="false" />
+    <Property Name="salario" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+    <Property Name="data_aposentadoria" Type="DateTime" Precision="3" />
+    <Property Name="numero_cnh" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="categoria_cnh" Type="String" MaxLength="2" Unicode="false" FixedLength="true" />
+    <Property Name="numero_conta_bancaria" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="numero_conta_fgts" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="agencia_conta_fgts" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="dac_numero_conta_fgts" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="dac_agencia_conta_fgts" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="agencia_conta_bancaria" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="dac_numero_conta_bancaria" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="dac_agencia_conta_bancaria" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+    <Property Name="tipo_conta_bancaria" Type="Int32" Nullable="false" />
+    <Property Name="endereco" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="bairro" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="complemento" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="cep" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
+    <Property Name="telefone" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="fax" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="ramal" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="celular" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="cor" Type="Int32" Nullable="false" />
+    <Property Name="estado_civil" Type="Int32" Nullable="false" />
+    <Property Name="horas_trabalho" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+    <Property Name="carteira_trabalho" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="email" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="tipo_admissao" Type="Int32" Nullable="false" />
+    <Property Name="data_admissao_transferencia" Type="DateTime" Precision="3" />
+    <Property Name="salario_adicional" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="tipo_teto_salarial" Type="Int32" Nullable="false" />
+    <Property Name="tipo_cabelo" Type="Int32" Nullable="false" />
+    <Property Name="altura" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="peso" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="tipo_olhos" Type="Int32" Nullable="false" />
+    <Property Name="sinais" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="rg_orgao" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="rg_emissao" Type="DateTime" Precision="3" />
+    <Property Name="titulo_secao" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="titulo_zona" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="ctps_rural" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="ctps_serie" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="carteira_trabalho_serie" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="carteira_trabalho_uf" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+    <Property Name="validade_cnh" Type="DateTime" Precision="3" />
+    <Property Name="carteira_exterior" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="rg_exterior" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="quantidade_filhos_brasil" Type="Int32" Nullable="false" />
+    <Property Name="data_chegada_brasil" Type="DateTime" Precision="3" />
+    <Property Name="pais_naturalizado" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+    <Property Name="decreto_naturalizacao" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+    <Property Name="casado_com_brasileiro" Type="Boolean" Nullable="false" />
+    <Property Name="conjuge" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
+    <Property Name="optante_fgts" Type="Boolean" Nullable="false" />
+    <Property Name="data_opcao_fgts" Type="DateTime" Precision="3" />
+    <Property Name="data_retratacao_fgts" Type="DateTime" Precision="3" />
+    <Property Name="data_pis" Type="DateTime" Precision="3" />
+    <Property Name="categoria_id" Type="Int32" Nullable="false" />
+    <Property Name="concurso_id" Type="Int32" />
+    <Property Name="setor_id" Type="Int32" Nullable="false" />
+    <Property Name="municipio_id" Type="Int32" Nullable="false" />
+    <Property Name="vinculo_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="categoria" Relationship="SisCadModel.categoria_to_funcionario" FromRole="funcionario_dados" ToRole="categoria" />
+    <NavigationProperty Name="concurso" Relationship="SisCadModel.concurso_funcionario_dados" FromRole="funcionario_dados" ToRole="concurso" />
+    <NavigationProperty Name="ferias" Relationship="SisCadModel.ferias_to_funcionario" FromRole="funcionario_dados" ToRole="ferias" />
+    <NavigationProperty Name="funcionario" Relationship="SisCadModel.fk_funcionario_to_funcionario_dados" FromRole="funcionario_dados" ToRole="funcionario" />
+    <NavigationProperty Name="municipio" Relationship="SisCadModel.fk_municipio_to_funcionario" FromRole="funcionario_dados" ToRole="municipio" />
+    <NavigationProperty Name="setor" Relationship="SisCadModel.setor_to_funcionario" FromRole="funcionario_dados" ToRole="setor" />
+    <NavigationProperty Name="vinculo" Relationship="SisCadModel.vinculo_funcionario_dados" FromRole="funcionario_dados" ToRole="vinculo" />
+  </EntityType>
+  <EntityType Name="municipio">
+    <Key>
+      <PropertyRef Name="municipio_id" />
+    </Key>
+    <Property Name="municipio_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="uf" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
+    <NavigationProperty Name="funcionario_dados" Relationship="SisCadModel.fk_municipio_to_funcionario" FromRole="municipio" ToRole="funcionario_dados" />
+  </EntityType>
+  <EntityType Name="setor">
+    <Key>
+      <PropertyRef Name="setor_id" />
+    </Key>
+    <Property Name="setor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descricao" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="departamento_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="departamento" Relationship="SisCadModel.fk_departamento_to_setor" FromRole="setor" ToRole="departamento" />
+    <NavigationProperty Name="funcionario_dados" Relationship="SisCadModel.setor_to_funcionario" FromRole="setor" ToRole="funcionario_dados" />
+  </EntityType>
+  <EntityType Name="vinculo">
+    <Key>
+      <PropertyRef Name="vinculo_id" />
+    </Key>
+    <Property Name="vinculo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="descricao" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="funcionario_dados" Relationship="SisCadModel.vinculo_funcionario_dados" FromRole="vinculo" ToRole="funcionario_dados" />
+  </EntityType>
+  <Association Name="categoria_to_funcionario">
+    <End Role="categoria" Type="SisCadModel.categoria" Multiplicity="1" />
+    <End Role="funcionario_dados" Type="SisCadModel.funcionario_dados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categoria">
+        <PropertyRef Name="categoria_id" />
+      </Principal>
+      <Dependent Role="funcionario_dados">
+        <PropertyRef Name="categoria_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="concurso_funcionario_dados">
+    <End Role="concurso" Type="SisCadModel.concurso" Multiplicity="0..1" />
+    <End Role="funcionario_dados" Type="SisCadModel.funcionario_dados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="concurso">
+        <PropertyRef Name="concurso_id" />
+      </Principal>
+      <Dependent Role="funcionario_dados">
+        <PropertyRef Name="concurso_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_departamento_to_setor">
+    <End Role="departamento" Type="SisCadModel.departamento" Multiplicity="1" />
+    <End Role="setor" Type="SisCadModel.setor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="departamento">
+        <PropertyRef Name="departamento_id" />
+      </Principal>
+      <Dependent Role="setor">
+        <PropertyRef Name="departamento_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ferias_to_funcionario">
+    <End Role="funcionario_dados" Type="SisCadModel.funcionario_dados" Multiplicity="1" />
+    <End Role="ferias" Type="SisCadModel.ferias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="funcionario_dados">
+        <PropertyRef Name="funcionario_dados_id" />
+      </Principal>
+      <Dependent Role="ferias">
+        <PropertyRef Name="funcionario_dados_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_funcionario_to_funcionario_dados">
+    <End Role="funcionario" Type="SisCadModel.funcionario" Multiplicity="1" />
+    <End Role="funcionario_dados" Type="SisCadModel.funcionario_dados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="funcionario">
+        <PropertyRef Name="funcionario_id" />
+      </Principal>
+      <Dependent Role="funcionario_dados">
+        <PropertyRef Name="funcionario_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_municipio_to_funcionario">
+    <End Role="municipio" Type="SisCadModel.municipio" Multiplicity="1" />
+    <End Role="funcionario_dados" Type="SisCadModel.funcionario_dados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="municipio">
+        <PropertyRef Name="municipio_id" />
+      </Principal>
+      <Dependent Role="funcionario_dados">
+        <PropertyRef Name="municipio_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="setor_to_funcionario">
+    <End Role="setor" Type="SisCadModel.setor" Multiplicity="1" />
+    <End Role="funcionario_dados" Type="SisCadModel.funcionario_dados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="setor">
+        <PropertyRef Name="setor_id" />
+      </Principal>
+      <Dependent Role="funcionario_dados">
+        <PropertyRef Name="setor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="vinculo_funcionario_dados">
+    <End Role="vinculo" Type="SisCadModel.vinculo" Multiplicity="1" />
+    <End Role="funcionario_dados" Type="SisCadModel.funcionario_dados" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="vinculo">
+        <PropertyRef Name="vinculo_id" />
+      </Principal>
+      <Dependent Role="funcionario_dados">
+        <PropertyRef Name="vinculo_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
