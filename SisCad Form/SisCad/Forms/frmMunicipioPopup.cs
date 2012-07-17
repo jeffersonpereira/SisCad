@@ -10,7 +10,7 @@ using Data.Entidades;
 
 namespace SisCad.Forms
 {
-    public partial class frmMunicipioPopup : frmBase
+    public partial class frmMunicipioPopup : Form
     {
         public frmMunicipioPopup()
         {

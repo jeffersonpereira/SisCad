@@ -33,7 +33,6 @@
             System.Windows.Forms.Label inicio_aquisicaoLabel;
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label2;
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFerias));
             this.feriasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fim_aquisicaoMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -43,15 +42,6 @@
             this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
             this.abono_pecuniarioCheckBox = new System.Windows.Forms.CheckBox();
             this.lookup1 = new SisCad.Forms.Lookup();
-            this.funcionarioBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.btnNovo = new System.Windows.Forms.ToolStripButton();
-            this.btnExcluir = new System.Windows.Forms.ToolStripButton();
-            this.btnSalvar = new System.Windows.Forms.ToolStripButton();
-            this.btnEditar = new System.Windows.Forms.ToolStripButton();
-            this.btnCancelar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnPesquisar = new System.Windows.Forms.ToolStripButton();
-            this.btnSair = new System.Windows.Forms.ToolStripButton();
             fim_aquisicaoLabel = new System.Windows.Forms.Label();
             inicio_aquisicaoLabel = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
@@ -59,8 +49,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.feriasBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.funcionarioBindingNavigator)).BeginInit();
-            this.funcionarioBindingNavigator.SuspendLayout();
             this.SuspendLayout();
             // 
             // fim_aquisicaoLabel
@@ -182,98 +170,11 @@
             this.lookup1.Size = new System.Drawing.Size(353, 37);
             this.lookup1.TabIndex = 5;
             // 
-            // funcionarioBindingNavigator
-            // 
-            this.funcionarioBindingNavigator.AddNewItem = this.btnNovo;
-            this.funcionarioBindingNavigator.CountItem = null;
-            this.funcionarioBindingNavigator.DeleteItem = this.btnExcluir;
-            this.funcionarioBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNovo,
-            this.btnExcluir,
-            this.btnSalvar,
-            this.btnEditar,
-            this.btnCancelar,
-            this.toolStripSeparator1,
-            this.btnPesquisar,
-            this.btnSair});
-            this.funcionarioBindingNavigator.Location = new System.Drawing.Point(0, 0);
-            this.funcionarioBindingNavigator.MoveFirstItem = null;
-            this.funcionarioBindingNavigator.MoveLastItem = null;
-            this.funcionarioBindingNavigator.MoveNextItem = null;
-            this.funcionarioBindingNavigator.MovePreviousItem = null;
-            this.funcionarioBindingNavigator.Name = "funcionarioBindingNavigator";
-            this.funcionarioBindingNavigator.PositionItem = null;
-            this.funcionarioBindingNavigator.Size = new System.Drawing.Size(468, 25);
-            this.funcionarioBindingNavigator.TabIndex = 8;
-            this.funcionarioBindingNavigator.Text = "bindingNavigator1";
-            // 
-            // btnNovo
-            // 
-            this.btnNovo.Image = global::SisCad.Properties.Resources.edit_add;
-            this.btnNovo.Name = "btnNovo";
-            this.btnNovo.RightToLeftAutoMirrorImage = true;
-            this.btnNovo.Size = new System.Drawing.Size(56, 22);
-            this.btnNovo.Text = "Novo";
-            // 
-            // btnExcluir
-            // 
-            this.btnExcluir.Image = global::SisCad.Properties.Resources.delete;
-            this.btnExcluir.Name = "btnExcluir";
-            this.btnExcluir.RightToLeftAutoMirrorImage = true;
-            this.btnExcluir.Size = new System.Drawing.Size(61, 22);
-            this.btnExcluir.Text = "Excluir";
-            // 
-            // btnSalvar
-            // 
-            this.btnSalvar.Enabled = false;
-            this.btnSalvar.Image = global::SisCad.Properties.Resources.apply;
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(58, 22);
-            this.btnSalvar.Text = "Salvar";
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.Image = global::SisCad.Properties.Resources.edit;
-            this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(57, 22);
-            this.btnEditar.Text = "Editar";
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Image = global::SisCad.Properties.Resources.editdelete;
-            this.btnCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(73, 22);
-            this.btnCancelar.Text = "Cancelar";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnPesquisar
-            // 
-            this.btnPesquisar.Image = global::SisCad.Properties.Resources.system_search;
-            this.btnPesquisar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPesquisar.Name = "btnPesquisar";
-            this.btnPesquisar.Size = new System.Drawing.Size(77, 22);
-            this.btnPesquisar.Text = "Pesquisar";
-            // 
-            // btnSair
-            // 
-            this.btnSair.Image = ((System.Drawing.Image)(resources.GetObject("btnSair.Image")));
-            this.btnSair.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSair.Name = "btnSair";
-            this.btnSair.Size = new System.Drawing.Size(46, 22);
-            this.btnSair.Text = "Sair";
-            // 
             // frmFerias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(468, 198);
-            this.Controls.Add(this.funcionarioBindingNavigator);
             this.Controls.Add(this.lookup1);
             this.Controls.Add(this.abono_pecuniarioCheckBox);
             this.Controls.Add(this.groupBox2);
@@ -281,14 +182,15 @@
             this.Name = "frmFerias";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Férias";
+            this.Controls.SetChildIndex(this.groupBox1, 0);
+            this.Controls.SetChildIndex(this.groupBox2, 0);
+            this.Controls.SetChildIndex(this.abono_pecuniarioCheckBox, 0);
+            this.Controls.SetChildIndex(this.lookup1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.feriasBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.funcionarioBindingNavigator)).EndInit();
-            this.funcionarioBindingNavigator.ResumeLayout(false);
-            this.funcionarioBindingNavigator.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -305,14 +207,5 @@
         private System.Windows.Forms.MaskedTextBox maskedTextBox2;
         private System.Windows.Forms.CheckBox abono_pecuniarioCheckBox;
         private Lookup lookup1;
-        private System.Windows.Forms.BindingNavigator funcionarioBindingNavigator;
-        private System.Windows.Forms.ToolStripButton btnNovo;
-        private System.Windows.Forms.ToolStripButton btnExcluir;
-        private System.Windows.Forms.ToolStripButton btnSalvar;
-        private System.Windows.Forms.ToolStripButton btnEditar;
-        private System.Windows.Forms.ToolStripButton btnCancelar;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btnPesquisar;
-        private System.Windows.Forms.ToolStripButton btnSair;
     }
 }

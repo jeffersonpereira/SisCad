@@ -67,16 +67,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.funcionarioBindingNavigator = new System.Windows.Forms.BindingNavigator(this.components);
-            this.btnNovo = new System.Windows.Forms.ToolStripButton();
             this.funcionarioBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnExcluir = new System.Windows.Forms.ToolStripButton();
-            this.btnSalvar = new System.Windows.Forms.ToolStripButton();
-            this.btnEditar = new System.Windows.Forms.ToolStripButton();
-            this.btnCancelar = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnPesquisar = new System.Windows.Forms.ToolStripButton();
-            this.btnSair = new System.Windows.Forms.ToolStripButton();
             this.nomeTextBox = new System.Windows.Forms.TextBox();
             this.sexoComboBox = new System.Windows.Forms.ComboBox();
             this.data_nascimentoMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
@@ -176,8 +167,6 @@
             estado_civilLabel = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.funcionarioBindingNavigator)).BeginInit();
-            this.funcionarioBindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.funcionarioBindingSource)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -501,96 +490,9 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // funcionarioBindingNavigator
-            // 
-            this.funcionarioBindingNavigator.AddNewItem = this.btnNovo;
-            this.funcionarioBindingNavigator.BindingSource = this.funcionarioBindingSource;
-            this.funcionarioBindingNavigator.CountItem = null;
-            this.funcionarioBindingNavigator.DeleteItem = this.btnExcluir;
-            this.funcionarioBindingNavigator.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnNovo,
-            this.btnExcluir,
-            this.btnSalvar,
-            this.btnEditar,
-            this.btnCancelar,
-            this.toolStripSeparator1,
-            this.btnPesquisar,
-            this.btnSair});
-            this.funcionarioBindingNavigator.Location = new System.Drawing.Point(0, 0);
-            this.funcionarioBindingNavigator.MoveFirstItem = null;
-            this.funcionarioBindingNavigator.MoveLastItem = null;
-            this.funcionarioBindingNavigator.MoveNextItem = null;
-            this.funcionarioBindingNavigator.MovePreviousItem = null;
-            this.funcionarioBindingNavigator.Name = "funcionarioBindingNavigator";
-            this.funcionarioBindingNavigator.PositionItem = null;
-            this.funcionarioBindingNavigator.Size = new System.Drawing.Size(731, 25);
-            this.funcionarioBindingNavigator.TabIndex = 7;
-            this.funcionarioBindingNavigator.Text = "bindingNavigator1";
-            // 
-            // btnNovo
-            // 
-            this.btnNovo.Image = global::SisCad.Properties.Resources.edit_add;
-            this.btnNovo.Name = "btnNovo";
-            this.btnNovo.RightToLeftAutoMirrorImage = true;
-            this.btnNovo.Size = new System.Drawing.Size(56, 22);
-            this.btnNovo.Text = "Novo";
-            // 
             // funcionarioBindingSource
             // 
             this.funcionarioBindingSource.DataSource = typeof(Data.Entidades.funcionario);
-            // 
-            // btnExcluir
-            // 
-            this.btnExcluir.Image = global::SisCad.Properties.Resources.delete;
-            this.btnExcluir.Name = "btnExcluir";
-            this.btnExcluir.RightToLeftAutoMirrorImage = true;
-            this.btnExcluir.Size = new System.Drawing.Size(61, 22);
-            this.btnExcluir.Text = "Excluir";
-            // 
-            // btnSalvar
-            // 
-            this.btnSalvar.Enabled = false;
-            this.btnSalvar.Image = global::SisCad.Properties.Resources.apply;
-            this.btnSalvar.Name = "btnSalvar";
-            this.btnSalvar.Size = new System.Drawing.Size(58, 22);
-            this.btnSalvar.Text = "Salvar";
-            // 
-            // btnEditar
-            // 
-            this.btnEditar.Image = global::SisCad.Properties.Resources.edit;
-            this.btnEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnEditar.Name = "btnEditar";
-            this.btnEditar.Size = new System.Drawing.Size(57, 22);
-            this.btnEditar.Text = "Editar";
-            // 
-            // btnCancelar
-            // 
-            this.btnCancelar.Image = global::SisCad.Properties.Resources.editdelete;
-            this.btnCancelar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(73, 22);
-            this.btnCancelar.Text = "Cancelar";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // btnPesquisar
-            // 
-            this.btnPesquisar.Image = global::SisCad.Properties.Resources.system_search;
-            this.btnPesquisar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnPesquisar.Name = "btnPesquisar";
-            this.btnPesquisar.Size = new System.Drawing.Size(77, 22);
-            this.btnPesquisar.Text = "Pesquisar";
-            // 
-            // btnSair
-            // 
-            this.btnSair.Image = ((System.Drawing.Image)(resources.GetObject("btnSair.Image")));
-            this.btnSair.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSair.Name = "btnSair";
-            this.btnSair.Size = new System.Drawing.Size(46, 22);
-            this.btnSair.Text = "Sair";
             // 
             // nomeTextBox
             // 
@@ -1258,16 +1160,43 @@
             this.Controls.Add(this.sexoComboBox);
             this.Controls.Add(nomeLabel);
             this.Controls.Add(this.nomeTextBox);
-            this.Controls.Add(this.funcionarioBindingNavigator);
             this.Controls.Add(this.panel1);
             this.Name = "frmFuncionario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Funcionário";
+            this.Controls.SetChildIndex(this.panel1, 0);
+            this.Controls.SetChildIndex(this.nomeTextBox, 0);
+            this.Controls.SetChildIndex(nomeLabel, 0);
+            this.Controls.SetChildIndex(this.sexoComboBox, 0);
+            this.Controls.SetChildIndex(sexoLabel, 0);
+            this.Controls.SetChildIndex(this.data_nascimentoMaskedTextBox, 0);
+            this.Controls.SetChildIndex(data_nascimentoLabel, 0);
+            this.Controls.SetChildIndex(this.enderecoTextBox, 0);
+            this.Controls.SetChildIndex(enderecoLabel, 0);
+            this.Controls.SetChildIndex(this.numeroTextBox, 0);
+            this.Controls.SetChildIndex(numeroLabel, 0);
+            this.Controls.SetChildIndex(this.bairroTextBox, 0);
+            this.Controls.SetChildIndex(bairroLabel, 0);
+            this.Controls.SetChildIndex(this.cepMaskedTextBox, 0);
+            this.Controls.SetChildIndex(cepLabel, 0);
+            this.Controls.SetChildIndex(this.pesquisaMunicipio, 0);
+            this.Controls.SetChildIndex(this.paiTextBox, 0);
+            this.Controls.SetChildIndex(paiLabel, 0);
+            this.Controls.SetChildIndex(this.maeTextBox, 0);
+            this.Controls.SetChildIndex(maeLabel, 0);
+            this.Controls.SetChildIndex(this.tabControl1, 0);
+            this.Controls.SetChildIndex(this.matriculaTextBox, 0);
+            this.Controls.SetChildIndex(matriculaLabel, 0);
+            this.Controls.SetChildIndex(this.telefone_residencialMaskedTextBox, 0);
+            this.Controls.SetChildIndex(telefone_residencialLabel, 0);
+            this.Controls.SetChildIndex(this.telefone_recadoMaskedTextBox, 0);
+            this.Controls.SetChildIndex(telefone_recadoLabel, 0);
+            this.Controls.SetChildIndex(this.telefone_celularMaskedTextBox, 0);
+            this.Controls.SetChildIndex(telefone_celularLabel, 0);
+            this.Controls.SetChildIndex(this.ativoCheckBox, 0);
+            this.Controls.SetChildIndex(this.button1, 0);
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.funcionarioBindingNavigator)).EndInit();
-            this.funcionarioBindingNavigator.ResumeLayout(false);
-            this.funcionarioBindingNavigator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.funcionarioBindingSource)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1295,10 +1224,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.BindingSource funcionarioBindingSource;
-        private System.Windows.Forms.BindingNavigator funcionarioBindingNavigator;
-        private System.Windows.Forms.ToolStripButton btnNovo;
-        private System.Windows.Forms.ToolStripButton btnExcluir;
-        private System.Windows.Forms.ToolStripButton btnSalvar;
         private System.Windows.Forms.TextBox nomeTextBox;
         private System.Windows.Forms.ComboBox sexoComboBox;
         private System.Windows.Forms.MaskedTextBox data_nascimentoMaskedTextBox;
@@ -1364,10 +1289,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn14;
         private System.Windows.Forms.BindingSource movimentacaoBindingSource;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ToolStripButton btnCancelar;
-        private System.Windows.Forms.ToolStripButton btnPesquisar;
-        private System.Windows.Forms.ToolStripButton btnSair;
-        private System.Windows.Forms.ToolStripButton btnEditar;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
