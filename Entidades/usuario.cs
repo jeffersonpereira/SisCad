@@ -4,32 +4,28 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace Data.Entidades
+namespace Model.Data
 {
-    [MetadataType(typeof(Usuario_Metadata))]
-    public class usuario
+    public class usuario : IValidade
     {
         public int usuario_id { get; set; }
         public string nome { get; set; }
         public string login { get; set; }
         public string senha { get; set; }
-    }
 
-    public class Usuario_Metadata
-    {
-        [Key]
-        public int usuario_id { get; set; }
+        string _senha = "***************";
+        public string SenhaProtegida
+        {
+            get { return _senha; }
+            set { senha = Security.GetHashMD5(value); }
+        }
 
-        [Required(ErrorMessage="Campo Nome é obrigatório.")]
-        [Display(Name="Nome")]
-        public string nome { get; set; }
-
-        [Required(ErrorMessage = "Campo Login é obrigatório.")]
-        [Display(Name = "Login")]
-        public string login { get; set; }
-
-        [Required(ErrorMessage = "Campo Senha é obrigatório.")]
-        [Display(Name = "Senha")]
-        public string senha { get; set; }
+        public List<ValidationResult> GetValidationResult()
+        {
+            ValidationContext context = new ValidationContext(this, null, null);
+            List<ValidationResult> result = new List<ValidationResult>();
+            Validator.TryValidateObject(this, context, result);
+            return result;
+        }
     }
 }

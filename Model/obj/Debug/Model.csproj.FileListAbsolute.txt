@@ -14,3 +14,19 @@ D:\Códigos Fontes\SisCad\Model\bin\Debug\Entidades.pdb
 D:\Códigos Fontes\SisCad\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
 D:\Códigos Fontes\SisCad\Model\obj\Debug\Model.dll
 D:\Códigos Fontes\SisCad\Model\obj\Debug\Model.pdb
+I:\SisCad\Model\bin\Debug\Model.dll.config
+I:\SisCad\Model\bin\Debug\Model.dll
+I:\SisCad\Model\bin\Debug\Model.pdb
+I:\SisCad\Model\bin\Debug\Entidades.dll
+I:\SisCad\Model\bin\Debug\Entidades.pdb
+I:\SisCad\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+I:\SisCad\Model\obj\Debug\Model.dll
+I:\SisCad\Model\obj\Debug\Model.pdb
+D:\Sistemas\SisCad\Model\bin\Debug\Model.dll.config
+D:\Sistemas\SisCad\Model\bin\Debug\Model.dll
+D:\Sistemas\SisCad\Model\bin\Debug\Model.pdb
+D:\Sistemas\SisCad\Model\bin\Debug\Entidades.dll
+D:\Sistemas\SisCad\Model\bin\Debug\Entidades.pdb
+D:\Sistemas\SisCad\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+D:\Sistemas\SisCad\Model\obj\Debug\Model.dll
+D:\Sistemas\SisCad\Model\obj\Debug\Model.pdb

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SisCadModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="SisCadModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SisCadModelStoreContainer">
           <EntitySet Name="cargo" EntityType="SisCadModel.Store.cargo" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="centro_custo" EntityType="SisCadModel.Store.centro_custo" store:Type="Tables" Schema="dbo" />
@@ -33,6 +33,10 @@
           <AssociationSet Name="fk_departamento_to_setor" Association="SisCadModel.Store.fk_departamento_to_setor">
             <End Role="departamento" EntitySet="departamento" />
             <End Role="setor" EntitySet="setor" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empresa_to_departamento" Association="SisCadModel.Store.fk_empresa_to_departamento">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="departamento" EntitySet="departamento" />
           </AssociationSet>
           <AssociationSet Name="fk_empresa_to_funcionario" Association="SisCadModel.Store.fk_empresa_to_funcionario">
             <End Role="empresa" EntitySet="empresa" />
@@ -103,7 +107,7 @@
           <Property Name="dependente_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="nome" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="data_nascimento" Type="datetime" />
-          <Property Name="parentesco" Type="int" Nullable="false" />
+          <Property Name="parentesco" Type="varchar" Nullable="false" MaxLength="256" />
           <Property Name="funcionario_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="empresa">
@@ -111,7 +115,7 @@
             <PropertyRef Name="empresa_id" />
           </Key>
           <Property Name="empresa_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="caminho_logo" Type="varchar" MaxLength="256" />
+          <Property Name="logo" Type="image" />
           <Property Name="razao_social" Type="varchar" Nullable="false" MaxLength="150" />
           <Property Name="cnpj" Type="char" Nullable="false" MaxLength="14" />
           <Property Name="endereco" Type="varchar" MaxLength="50" />
@@ -132,7 +136,9 @@
           <Property Name="abono_pecuniario" Type="bit" Nullable="false" />
           <Property Name="inicio_gozo" Type="datetime" Nullable="false" />
           <Property Name="fim_gozo" Type="datetime" Nullable="false" />
+          <Property Name="inicio_abono" Type="datetime" />
           <Property Name="funcionario_id" Type="int" Nullable="false" />
+          <Property Name="fim_abono" Type="datetime" />
         </EntityType>
         <EntityType Name="funcionario">
           <Key>
@@ -152,9 +158,9 @@
           <Property Name="telefone_residencial" Type="char" MaxLength="10" />
           <Property Name="telefone_celular" Type="char" MaxLength="10" />
           <Property Name="telefone_recado" Type="char" MaxLength="10" />
-          <Property Name="estado_civil" Type="int" Nullable="false" />
-          <Property Name="grau_instrucao" Type="int" Nullable="false" />
-          <Property Name="cor" Type="int" Nullable="false" />
+          <Property Name="estado_civil" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="grau_instrucao" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="cor" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="rg" Type="char" MaxLength="20" />
           <Property Name="data_emissao_rg" Type="datetime" />
           <Property Name="orgao_emissor_rg" Type="char" MaxLength="6" />
@@ -175,11 +181,20 @@
           <Property Name="setor_id" Type="int" Nullable="false" />
           <Property Name="cargo_id" Type="int" Nullable="false" />
           <Property Name="cargo_contratacao_id" Type="int" Nullable="false" />
-          <Property Name="caminho_foto" Type="varchar" MaxLength="256" />
           <Property Name="ativo" Type="bit" Nullable="false" />
           <Property Name="empresa_id" Type="int" Nullable="false" />
           <Property Name="mae" Type="varchar" MaxLength="100" />
           <Property Name="pai" Type="varchar" MaxLength="100" />
+          <Property Name="foto" Type="image" />
+          <Property Name="portaria_decreto" Type="char" MaxLength="20" />
+          <Property Name="data_publicacao" Type="datetime" />
+          <Property Name="banco" Type="varchar" MaxLength="100" />
+          <Property Name="agencia" Type="int" />
+          <Property Name="digito_agencia" Type="char" MaxLength="1" />
+          <Property Name="numero_conta" Type="int" />
+          <Property Name="digito_conta" Type="char" MaxLength="1" />
+          <Property Name="vinculo" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="nacionalidade" Type="varchar" Nullable="false" MaxLength="100" />
         </EntityType>
         <EntityType Name="gestor">
           <Key>
@@ -195,6 +210,7 @@
           <Property Name="bairro" Type="varchar" MaxLength="20" />
           <Property Name="inicio_gestao" Type="datetime" />
           <Property Name="fim_gestao" Type="datetime" />
+          <Property Name="municipio_id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="movimentacao">
           <Key>
@@ -205,7 +221,7 @@
           <Property Name="data_saida" Type="datetime" Nullable="false" />
           <Property Name="data_retorno" Type="datetime" />
           <Property Name="funcionario_id" Type="int" Nullable="false" />
-          <Property Name="tipo_movimentacao" Type="int" Nullable="false" />
+          <Property Name="tipo_movimentacao" Type="varchar" Nullable="false" MaxLength="256" />
         </EntityType>
         <EntityType Name="municipio">
           <Key>
@@ -279,6 +295,18 @@
             </Principal>
             <Dependent Role="setor">
               <PropertyRef Name="departamento_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empresa_to_departamento">
+          <End Role="empresa" Type="SisCadModel.Store.empresa" Multiplicity="1" />
+          <End Role="departamento" Type="SisCadModel.Store.departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="empresa_id" />
+            </Principal>
+            <Dependent Role="departamento">
+              <PropertyRef Name="empresa_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -390,73 +418,76 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="SisCadModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <Schema Namespace="Model.Data" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="SisCadEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="cargo" EntityType="SisCadModel.cargo" />
-          <EntitySet Name="centro_custo" EntityType="SisCadModel.centro_custo" />
-          <EntitySet Name="departamento" EntityType="SisCadModel.departamento" />
-          <EntitySet Name="dependente" EntityType="SisCadModel.dependente" />
-          <EntitySet Name="empresa" EntityType="SisCadModel.empresa" />
-          <EntitySet Name="ferias" EntityType="SisCadModel.ferias" />
-          <EntitySet Name="funcionario" EntityType="SisCadModel.funcionario" />
-          <EntitySet Name="gestor" EntityType="SisCadModel.gestor" />
-          <EntitySet Name="movimentacao" EntityType="SisCadModel.movimentacao" />
-          <EntitySet Name="municipio" EntityType="SisCadModel.municipio" />
-          <EntitySet Name="setor" EntityType="SisCadModel.setor" />
-          <EntitySet Name="usuario" EntityType="SisCadModel.usuario" />
-          <AssociationSet Name="fk_cargo_atual_to_funcionario" Association="SisCadModel.fk_cargo_atual_to_funcionario">
+          <EntitySet Name="cargo" EntityType="Model.Data.cargo" />
+          <EntitySet Name="centro_custo" EntityType="Model.Data.centro_custo" />
+          <EntitySet Name="departamento" EntityType="Model.Data.departamento" />
+          <EntitySet Name="dependente" EntityType="Model.Data.dependente" />
+          <EntitySet Name="empresa" EntityType="Model.Data.empresa" />
+          <EntitySet Name="ferias" EntityType="Model.Data.ferias" />
+          <EntitySet Name="funcionario" EntityType="Model.Data.funcionario" />
+          <EntitySet Name="gestor" EntityType="Model.Data.gestor" />
+          <EntitySet Name="movimentacao" EntityType="Model.Data.movimentacao" />
+          <EntitySet Name="municipio" EntityType="Model.Data.municipio" />
+          <EntitySet Name="setor" EntityType="Model.Data.setor" />
+          <EntitySet Name="usuario" EntityType="Model.Data.usuario" />
+          <AssociationSet Name="fk_cargo_atual_to_funcionario" Association="Model.Data.fk_cargo_atual_to_funcionario">
             <End Role="cargo" EntitySet="cargo" />
             <End Role="funcionario" EntitySet="funcionario" />
           </AssociationSet>
-          <AssociationSet Name="fk_cargo_contratado_to_funcionario" Association="SisCadModel.fk_cargo_contratado_to_funcionario">
+          <AssociationSet Name="fk_cargo_contratado_to_funcionario" Association="Model.Data.fk_cargo_contratado_to_funcionario">
             <End Role="cargo" EntitySet="cargo" />
             <End Role="funcionario" EntitySet="funcionario" />
           </AssociationSet>
-          <AssociationSet Name="fk_centro_custo_to_setor" Association="SisCadModel.fk_centro_custo_to_setor">
+          <AssociationSet Name="fk_centro_custo_to_setor" Association="Model.Data.fk_centro_custo_to_setor">
             <End Role="centro_custo" EntitySet="centro_custo" />
             <End Role="setor" EntitySet="setor" />
           </AssociationSet>
-          <AssociationSet Name="fk_departamento_to_setor" Association="SisCadModel.fk_departamento_to_setor">
+          <AssociationSet Name="fk_departamento_to_setor" Association="Model.Data.fk_departamento_to_setor">
             <End Role="departamento" EntitySet="departamento" />
             <End Role="setor" EntitySet="setor" />
           </AssociationSet>
-          <AssociationSet Name="fk_funcionario_to_dependente" Association="SisCadModel.fk_funcionario_to_dependente">
+          <AssociationSet Name="fk_empresa_to_departamento" Association="Model.Data.fk_empresa_to_departamento">
+            <End Role="empresa" EntitySet="empresa" />
+            <End Role="departamento" EntitySet="departamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_funcionario_to_dependente" Association="Model.Data.fk_funcionario_to_dependente">
             <End Role="funcionario" EntitySet="funcionario" />
             <End Role="dependente" EntitySet="dependente" />
           </AssociationSet>
-          <AssociationSet Name="fk_empresa_to_funcionario" Association="SisCadModel.fk_empresa_to_funcionario">
+          <AssociationSet Name="fk_empresa_to_funcionario" Association="Model.Data.fk_empresa_to_funcionario">
             <End Role="empresa" EntitySet="empresa" />
             <End Role="funcionario" EntitySet="funcionario" />
           </AssociationSet>
-          <AssociationSet Name="fk_gestor_to_empresa" Association="SisCadModel.fk_gestor_to_empresa">
+          <AssociationSet Name="fk_gestor_to_empresa" Association="Model.Data.fk_gestor_to_empresa">
             <End Role="gestor" EntitySet="gestor" />
             <End Role="empresa" EntitySet="empresa" />
           </AssociationSet>
-          <AssociationSet Name="fk_municipio_to_empresa" Association="SisCadModel.fk_municipio_to_empresa">
+          <AssociationSet Name="fk_municipio_to_empresa" Association="Model.Data.fk_municipio_to_empresa">
             <End Role="municipio" EntitySet="municipio" />
             <End Role="empresa" EntitySet="empresa" />
           </AssociationSet>
-          <AssociationSet Name="fk_funcionario_to_ferias" Association="SisCadModel.fk_funcionario_to_ferias">
+          <AssociationSet Name="fk_funcionario_to_ferias" Association="Model.Data.fk_funcionario_to_ferias">
             <End Role="funcionario" EntitySet="funcionario" />
             <End Role="ferias" EntitySet="ferias" />
           </AssociationSet>
-          <AssociationSet Name="fk_funcionario_to_movimentacao" Association="SisCadModel.fk_funcionario_to_movimentacao">
+          <AssociationSet Name="fk_funcionario_to_movimentacao" Association="Model.Data.fk_funcionario_to_movimentacao">
             <End Role="funcionario" EntitySet="funcionario" />
             <End Role="movimentacao" EntitySet="movimentacao" />
           </AssociationSet>
-          <AssociationSet Name="fk_municipio_naturalidade_to_funcionario" Association="SisCadModel.fk_municipio_naturalidade_to_funcionario">
+          <AssociationSet Name="fk_municipio_naturalidade_to_funcionario" Association="Model.Data.fk_municipio_naturalidade_to_funcionario">
             <End Role="municipio" EntitySet="municipio" />
             <End Role="funcionario" EntitySet="funcionario" />
           </AssociationSet>
-          <AssociationSet Name="fk_municipio_to_funcionario" Association="SisCadModel.fk_municipio_to_funcionario">
+          <AssociationSet Name="fk_municipio_to_funcionario" Association="Model.Data.fk_municipio_to_funcionario">
             <End Role="municipio" EntitySet="municipio" />
             <End Role="funcionario" EntitySet="funcionario" />
           </AssociationSet>
-          <AssociationSet Name="fk_setor_to_funcionario" Association="SisCadModel.fk_setor_to_funcionario">
+          <AssociationSet Name="fk_setor_to_funcionario" Association="Model.Data.fk_setor_to_funcionario">
             <End Role="setor" EntitySet="setor" />
             <End Role="funcionario" EntitySet="funcionario" />
           </AssociationSet>
@@ -465,194 +496,208 @@
           <Key>
             <PropertyRef Name="cargo_id" />
           </Key>
-          <Property Name="cargo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descricao" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="cbo" Type="String" MaxLength="8" Unicode="false" FixedLength="true" />
-          <NavigationProperty Name="funcionario" Relationship="SisCadModel.fk_cargo_atual_to_funcionario" FromRole="cargo" ToRole="funcionario" />
-          <NavigationProperty Name="funcionario_contratacao" Relationship="SisCadModel.fk_cargo_contratado_to_funcionario" FromRole="cargo" ToRole="funcionario" />
+          <Property Type="Int32" Name="cargo_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="descricao" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="cbo" MaxLength="8" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="funcionario" Relationship="Model.Data.fk_cargo_atual_to_funcionario" FromRole="cargo" ToRole="funcionario" />
+          <NavigationProperty Name="funcionario_contratacao" Relationship="Model.Data.fk_cargo_contratado_to_funcionario" FromRole="cargo" ToRole="funcionario" />
         </EntityType>
         <EntityType Name="centro_custo">
           <Key>
             <PropertyRef Name="centro_custo_id" />
           </Key>
-          <Property Name="centro_custo_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigo" Type="Int32" Nullable="false" />
-          <Property Name="descricao" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="setor" Relationship="SisCadModel.fk_centro_custo_to_setor" FromRole="centro_custo" ToRole="setor" />
+          <Property Type="Int32" Name="centro_custo_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="codigo" Nullable="false" />
+          <Property Type="String" Name="descricao" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="setor" Relationship="Model.Data.fk_centro_custo_to_setor" FromRole="centro_custo" ToRole="setor" />
         </EntityType>
         <EntityType Name="departamento">
           <Key>
             <PropertyRef Name="departamento_id" />
           </Key>
-          <Property Name="departamento_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigo" Type="Int32" Nullable="false" />
-          <Property Name="descricao" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="empresa_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="setor" Relationship="SisCadModel.fk_departamento_to_setor" FromRole="departamento" ToRole="setor" />
+          <Property Type="Int32" Name="departamento_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="codigo" Nullable="false" />
+          <Property Type="String" Name="descricao" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="empresa_id" Nullable="false" />
+          <NavigationProperty Name="setor" Relationship="Model.Data.fk_departamento_to_setor" FromRole="departamento" ToRole="setor" />
+          <NavigationProperty Name="empresa" Relationship="Model.Data.fk_empresa_to_departamento" FromRole="departamento" ToRole="empresa" />
         </EntityType>
         <EntityType Name="dependente">
           <Key>
             <PropertyRef Name="dependente_id" />
           </Key>
-          <Property Name="dependente_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nome" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="data_nascimento" Type="DateTime" Precision="3" />
-          <Property Name="parentesco" Type="Int32" Nullable="false" />
-          <Property Name="funcionario_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="funcionario" Relationship="SisCadModel.fk_funcionario_to_dependente" FromRole="dependente" ToRole="funcionario" />
+          <Property Type="Int32" Name="dependente_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="nome" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="data_nascimento" />
+          <Property Type="String" Name="parentesco" Nullable="false" MaxLength="Max" />
+          <Property Type="Int32" Name="funcionario_id" Nullable="false" />
+          <NavigationProperty Name="funcionario" Relationship="Model.Data.fk_funcionario_to_dependente" FromRole="dependente" ToRole="funcionario" />
         </EntityType>
         <EntityType Name="empresa">
           <Key>
             <PropertyRef Name="empresa_id" />
           </Key>
-          <Property Name="empresa_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="caminho_logo" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
-          <Property Name="razao_social" Type="String" Nullable="false" MaxLength="150" Unicode="false" FixedLength="false" />
-          <Property Name="cnpj" Type="String" Nullable="false" MaxLength="14" Unicode="false" FixedLength="true" />
-          <Property Name="endereco" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="numero" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
-          <Property Name="bairro" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
-          <Property Name="complemento" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="cep" Type="String" MaxLength="8" Unicode="false" FixedLength="true" />
-          <Property Name="municipio_id" Type="Int32" Nullable="false" />
-          <Property Name="gestor_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="funcionario" Relationship="SisCadModel.fk_empresa_to_funcionario" FromRole="empresa" ToRole="funcionario" />
-          <NavigationProperty Name="gestor" Relationship="SisCadModel.fk_gestor_to_empresa" FromRole="empresa" ToRole="gestor" />
-          <NavigationProperty Name="municipio" Relationship="SisCadModel.fk_municipio_to_empresa" FromRole="empresa" ToRole="municipio" />
+          <Property Type="Int32" Name="empresa_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="razao_social" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="cnpj" Nullable="false" MaxLength="14" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="endereco" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="numero" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="bairro" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="complemento" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="cep" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="municipio_id" Nullable="false" />
+          <Property Type="Int32" Name="gestor_id" Nullable="false" />
+          <NavigationProperty Name="departamento" Relationship="Model.Data.fk_empresa_to_departamento" FromRole="empresa" ToRole="departamento" />
+          <NavigationProperty Name="funcionario" Relationship="Model.Data.fk_empresa_to_funcionario" FromRole="empresa" ToRole="funcionario" />
+          <NavigationProperty Name="gestor" Relationship="Model.Data.fk_gestor_to_empresa" FromRole="empresa" ToRole="gestor" />
+          <NavigationProperty Name="municipio" Relationship="Model.Data.fk_municipio_to_empresa" FromRole="empresa" ToRole="municipio" />
+          <Property Type="Binary" Name="logo" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="ferias">
           <Key>
             <PropertyRef Name="ferias_id" />
           </Key>
-          <Property Name="ferias_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="inicio_aquisicao" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fim_aquisicao" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="abono_pecuniario" Type="Boolean" Nullable="false" />
-          <Property Name="inicio_gozo" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="fim_gozo" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="funcionario_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="funcionario" Relationship="SisCadModel.fk_funcionario_to_ferias" FromRole="ferias" ToRole="funcionario" />
+          <Property Type="Int32" Name="ferias_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="inicio_aquisicao" Nullable="false" />
+          <Property Type="DateTime" Name="fim_aquisicao" Nullable="false" />
+          <Property Type="Boolean" Name="abono_pecuniario" Nullable="false" />
+          <Property Type="DateTime" Name="inicio_gozo" Nullable="false" />
+          <Property Type="DateTime" Name="fim_gozo" Nullable="false" />
+          <Property Type="Int32" Name="funcionario_id" Nullable="false" />
+          <NavigationProperty Name="funcionario" Relationship="Model.Data.fk_funcionario_to_ferias" FromRole="ferias" ToRole="funcionario" />
+          <Property Type="DateTime" Name="inicio_abono" />
+          <Property Type="DateTime" Name="fim_abono" />
         </EntityType>
         <EntityType Name="funcionario">
           <Key>
             <PropertyRef Name="funcionario_id" />
           </Key>
-          <Property Name="funcionario_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="matricula" Type="Int32" Nullable="false" />
-          <Property Name="nome" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="data_nascimento" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="sexo" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
-          <Property Name="endereco" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="numero" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
-          <Property Name="bairro" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
-          <Property Name="cep" Type="String" MaxLength="8" Unicode="false" FixedLength="true" />
-          <Property Name="municipio_id" Type="Int32" Nullable="false" />
-          <Property Name="municipio_id_naturalidade" Type="Int32" Nullable="false" />
-          <Property Name="telefone_residencial" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
-          <Property Name="telefone_celular" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
-          <Property Name="telefone_recado" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
-          <Property Name="estado_civil" Type="Int32" Nullable="false" />
-          <Property Name="grau_instrucao" Type="Int32" Nullable="false" />
-          <Property Name="cor" Type="Int32" Nullable="false" />
-          <Property Name="rg" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
-          <Property Name="data_emissao_rg" Type="DateTime" Precision="3" />
-          <Property Name="orgao_emissor_rg" Type="String" MaxLength="6" Unicode="false" FixedLength="true" />
-          <Property Name="cpf" Type="String" MaxLength="11" Unicode="false" FixedLength="true" />
-          <Property Name="pis" Type="String" MaxLength="11" Unicode="false" FixedLength="true" />
-          <Property Name="ctps" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
-          <Property Name="serie" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
-          <Property Name="data_expedicao_ctps" Type="DateTime" Precision="3" />
-          <Property Name="data_expedicao_cnh" Type="DateTime" Precision="3" />
-          <Property Name="titulo_eleitor" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
-          <Property Name="zona" Type="String" MaxLength="4" Unicode="false" FixedLength="true" />
-          <Property Name="secao" Type="String" MaxLength="4" Unicode="false" FixedLength="true" />
-          <Property Name="cnh" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
-          <Property Name="categoria_cnh" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
-          <Property Name="data_admissao" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="salario_inicial" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
-          <Property Name="salario_atual" Type="Decimal" Nullable="false" Precision="9" Scale="2" />
-          <Property Name="setor_id" Type="Int32" Nullable="false" />
-          <Property Name="cargo_id" Type="Int32" Nullable="false" />
-          <Property Name="cargo_contratacao_id" Type="Int32" Nullable="false" />
-          <Property Name="caminho_foto" Type="String" MaxLength="256" Unicode="false" FixedLength="false" />
-          <Property Name="ativo" Type="Boolean" Nullable="false" />
-          <Property Name="empresa_id" Type="Int32" Nullable="false" />
-          <Property Name="mae" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="pai" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-          <NavigationProperty Name="cargo" Relationship="SisCadModel.fk_cargo_atual_to_funcionario" FromRole="funcionario" ToRole="cargo" />
-          <NavigationProperty Name="cargo_contratacao" Relationship="SisCadModel.fk_cargo_contratado_to_funcionario" FromRole="funcionario" ToRole="cargo" />
-          <NavigationProperty Name="dependente" Relationship="SisCadModel.fk_funcionario_to_dependente" FromRole="funcionario" ToRole="dependente" />
-          <NavigationProperty Name="empresa" Relationship="SisCadModel.fk_empresa_to_funcionario" FromRole="funcionario" ToRole="empresa" />
-          <NavigationProperty Name="ferias" Relationship="SisCadModel.fk_funcionario_to_ferias" FromRole="funcionario" ToRole="ferias" />
-          <NavigationProperty Name="movimentacao" Relationship="SisCadModel.fk_funcionario_to_movimentacao" FromRole="funcionario" ToRole="movimentacao" />
-          <NavigationProperty Name="municipio" Relationship="SisCadModel.fk_municipio_naturalidade_to_funcionario" FromRole="funcionario" ToRole="municipio" />
-          <NavigationProperty Name="naturalidade" Relationship="SisCadModel.fk_municipio_to_funcionario" FromRole="funcionario" ToRole="municipio" />
-          <NavigationProperty Name="setor" Relationship="SisCadModel.fk_setor_to_funcionario" FromRole="funcionario" ToRole="setor" />
+          <Property Type="Int32" Name="funcionario_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="matricula" Nullable="false" />
+          <Property Type="String" Name="nome" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="data_nascimento" Nullable="false" />
+          <Property Type="String" Name="sexo" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="endereco" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="numero" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="bairro" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="cep" MaxLength="8" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="municipio_id" Nullable="false" />
+          <Property Type="Int32" Name="municipio_id_naturalidade" Nullable="false" />
+          <Property Type="String" Name="telefone_residencial" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="telefone_celular" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="telefone_recado" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="estado_civil" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="grau_instrucao" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="cor" Nullable="false" MaxLength="Max" />
+          <Property Type="String" Name="rg" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="data_emissao_rg" />
+          <Property Type="String" Name="orgao_emissor_rg" MaxLength="6" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="cpf" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="pis" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ctps" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="serie" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="data_expedicao_ctps" />
+          <Property Type="DateTime" Name="data_expedicao_cnh" />
+          <Property Type="String" Name="titulo_eleitor" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="zona" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="secao" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="cnh" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="categoria_cnh" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="data_admissao" Nullable="false" />
+          <Property Type="Decimal" Name="salario_inicial" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Decimal" Name="salario_atual" Nullable="false" Precision="9" Scale="2" />
+          <Property Type="Int32" Name="setor_id" Nullable="false" />
+          <Property Type="Int32" Name="cargo_id" Nullable="false" />
+          <Property Type="Int32" Name="cargo_contratacao_id" Nullable="false" />
+          <Property Type="Boolean" Name="ativo" Nullable="false" />
+          <Property Type="Int32" Name="empresa_id" Nullable="false" />
+          <Property Type="String" Name="mae" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="pai" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Binary" Name="foto" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="cargo" Relationship="Model.Data.fk_cargo_atual_to_funcionario" FromRole="funcionario" ToRole="cargo" />
+          <NavigationProperty Name="cargo_contratacao" Relationship="Model.Data.fk_cargo_contratado_to_funcionario" FromRole="funcionario" ToRole="cargo" />
+          <NavigationProperty Name="dependente" Relationship="Model.Data.fk_funcionario_to_dependente" FromRole="funcionario" ToRole="dependente" />
+          <NavigationProperty Name="empresa" Relationship="Model.Data.fk_empresa_to_funcionario" FromRole="funcionario" ToRole="empresa" />
+          <NavigationProperty Name="ferias" Relationship="Model.Data.fk_funcionario_to_ferias" FromRole="funcionario" ToRole="ferias" />
+          <NavigationProperty Name="movimentacao" Relationship="Model.Data.fk_funcionario_to_movimentacao" FromRole="funcionario" ToRole="movimentacao" />
+          <NavigationProperty Name="municipio" Relationship="Model.Data.fk_municipio_naturalidade_to_funcionario" FromRole="funcionario" ToRole="municipio" />
+          <NavigationProperty Name="naturalidade" Relationship="Model.Data.fk_municipio_to_funcionario" FromRole="funcionario" ToRole="municipio" />
+          <NavigationProperty Name="setor" Relationship="Model.Data.fk_setor_to_funcionario" FromRole="funcionario" ToRole="setor" />
+          <Property Type="String" Name="portaria_decreto" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="data_publicacao" />
+          <Property Type="String" Name="banco" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="agencia" />
+          <Property Type="String" Name="digito_agencia" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="Int32" Name="numero_conta" />
+          <Property Type="String" Name="digito_conta" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="vinculo" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="nacionalidade" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="gestor">
           <Key>
             <PropertyRef Name="gestor_id" />
           </Key>
-          <Property Name="nome" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="gestor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="cpf" Type="String" MaxLength="11" Unicode="false" FixedLength="true" />
-          <Property Name="nascimento" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="endereco" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
-          <Property Name="numero" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
-          <Property Name="complemento" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
-          <Property Name="bairro" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="inicio_gestao" Type="DateTime" Precision="3" />
-          <Property Name="fim_gestao" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="empresa" Relationship="SisCadModel.fk_gestor_to_empresa" FromRole="gestor" ToRole="empresa" />
+          <Property Type="String" Name="nome" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="gestor_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="cpf" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="nascimento" Nullable="false" />
+          <Property Type="String" Name="endereco" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="numero" MaxLength="5" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="complemento" MaxLength="20" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="bairro" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="inicio_gestao" />
+          <Property Type="DateTime" Name="fim_gestao" />
+          <NavigationProperty Name="empresa" Relationship="Model.Data.fk_gestor_to_empresa" FromRole="gestor" ToRole="empresa" />
+          <Property Type="Int32" Name="municipio_id" Nullable="false" />
         </EntityType>
         <EntityType Name="movimentacao">
           <Key>
             <PropertyRef Name="movimentacao_id" />
           </Key>
-          <Property Name="movimentacao_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="descricao" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
-          <Property Name="data_saida" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="data_retorno" Type="DateTime" Precision="3" />
-          <Property Name="funcionario_id" Type="Int32" Nullable="false" />
-          <Property Name="tipo_movimentacao" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="funcionario" Relationship="SisCadModel.fk_funcionario_to_movimentacao" FromRole="movimentacao" ToRole="funcionario" />
+          <Property Type="Int32" Name="movimentacao_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="descricao" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="data_saida" Nullable="false" />
+          <Property Type="DateTime" Name="data_retorno" />
+          <Property Type="Int32" Name="funcionario_id" Nullable="false" />
+          <NavigationProperty Name="funcionario" Relationship="Model.Data.fk_funcionario_to_movimentacao" FromRole="movimentacao" ToRole="funcionario" />
+          <Property Type="String" Name="tipo_movimentacao" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="municipio">
           <Key>
             <PropertyRef Name="municipio_id" />
           </Key>
-          <Property Name="municipio_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nome" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="uf" Type="String" Nullable="false" MaxLength="2" Unicode="false" FixedLength="true" />
-          <NavigationProperty Name="empresa" Relationship="SisCadModel.fk_municipio_to_empresa" FromRole="municipio" ToRole="empresa" />
-          <NavigationProperty Name="funcionario" Relationship="SisCadModel.fk_municipio_naturalidade_to_funcionario" FromRole="municipio" ToRole="funcionario" />
-          <NavigationProperty Name="funcionario_naturalidade" Relationship="SisCadModel.fk_municipio_to_funcionario" FromRole="municipio" ToRole="funcionario" />
+          <Property Type="Int32" Name="municipio_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="nome" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="uf" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="empresa" Relationship="Model.Data.fk_municipio_to_empresa" FromRole="municipio" ToRole="empresa" />
+          <NavigationProperty Name="funcionario" Relationship="Model.Data.fk_municipio_naturalidade_to_funcionario" FromRole="municipio" ToRole="funcionario" />
+          <NavigationProperty Name="funcionario_naturalidade" Relationship="Model.Data.fk_municipio_to_funcionario" FromRole="municipio" ToRole="funcionario" />
         </EntityType>
         <EntityType Name="setor">
           <Key>
             <PropertyRef Name="setor_id" />
           </Key>
-          <Property Name="setor_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="codigo" Type="Int32" Nullable="false" />
-          <Property Name="descricao" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="departamento_id" Type="Int32" Nullable="false" />
-          <Property Name="centro_custo_id" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="centro_custo" Relationship="SisCadModel.fk_centro_custo_to_setor" FromRole="setor" ToRole="centro_custo" />
-          <NavigationProperty Name="departamento" Relationship="SisCadModel.fk_departamento_to_setor" FromRole="setor" ToRole="departamento" />
-          <NavigationProperty Name="funcionario" Relationship="SisCadModel.fk_setor_to_funcionario" FromRole="setor" ToRole="funcionario" />
+          <Property Type="Int32" Name="setor_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="codigo" Nullable="false" />
+          <Property Type="String" Name="descricao" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="departamento_id" Nullable="false" />
+          <Property Type="Int32" Name="centro_custo_id" Nullable="false" />
+          <NavigationProperty Name="centro_custo" Relationship="Model.Data.fk_centro_custo_to_setor" FromRole="setor" ToRole="centro_custo" />
+          <NavigationProperty Name="departamento" Relationship="Model.Data.fk_departamento_to_setor" FromRole="setor" ToRole="departamento" />
+          <NavigationProperty Name="funcionario" Relationship="Model.Data.fk_setor_to_funcionario" FromRole="setor" ToRole="funcionario" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
             <PropertyRef Name="usuario_id" />
           </Key>
-          <Property Name="usuario_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nome" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="login" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="senha" Type="String" Nullable="false" MaxLength="256" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="usuario_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="nome" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="login" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="senha" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fk_cargo_atual_to_funcionario">
-          <End Role="cargo" Type="SisCadModel.cargo" Multiplicity="1" />
-          <End Role="funcionario" Type="SisCadModel.funcionario" Multiplicity="*" />
+          <End Type="Model.Data.cargo" Role="cargo" Multiplicity="1" />
+          <End Type="Model.Data.funcionario" Role="funcionario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="cargo">
               <PropertyRef Name="cargo_id" />
@@ -663,8 +708,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_cargo_contratado_to_funcionario">
-          <End Role="cargo" Type="SisCadModel.cargo" Multiplicity="1" />
-          <End Role="funcionario" Type="SisCadModel.funcionario" Multiplicity="*" />
+          <End Type="Model.Data.cargo" Role="cargo" Multiplicity="1" />
+          <End Type="Model.Data.funcionario" Role="funcionario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="cargo">
               <PropertyRef Name="cargo_id" />
@@ -675,8 +720,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_centro_custo_to_setor">
-          <End Role="centro_custo" Type="SisCadModel.centro_custo" Multiplicity="1" />
-          <End Role="setor" Type="SisCadModel.setor" Multiplicity="*" />
+          <End Type="Model.Data.centro_custo" Role="centro_custo" Multiplicity="1" />
+          <End Type="Model.Data.setor" Role="setor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="centro_custo">
               <PropertyRef Name="centro_custo_id" />
@@ -687,8 +732,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_departamento_to_setor">
-          <End Role="departamento" Type="SisCadModel.departamento" Multiplicity="1" />
-          <End Role="setor" Type="SisCadModel.setor" Multiplicity="*" />
+          <End Type="Model.Data.departamento" Role="departamento" Multiplicity="1" />
+          <End Type="Model.Data.setor" Role="setor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="departamento">
               <PropertyRef Name="departamento_id" />
@@ -698,9 +743,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_empresa_to_departamento">
+          <End Type="Model.Data.empresa" Role="empresa" Multiplicity="1" />
+          <End Type="Model.Data.departamento" Role="departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empresa">
+              <PropertyRef Name="empresa_id" />
+            </Principal>
+            <Dependent Role="departamento">
+              <PropertyRef Name="empresa_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_funcionario_to_dependente">
-          <End Role="funcionario" Type="SisCadModel.funcionario" Multiplicity="1" />
-          <End Role="dependente" Type="SisCadModel.dependente" Multiplicity="*" />
+          <End Type="Model.Data.funcionario" Role="funcionario" Multiplicity="1" />
+          <End Type="Model.Data.dependente" Role="dependente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="funcionario">
               <PropertyRef Name="funcionario_id" />
@@ -711,8 +768,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_empresa_to_funcionario">
-          <End Role="empresa" Type="SisCadModel.empresa" Multiplicity="1" />
-          <End Role="funcionario" Type="SisCadModel.funcionario" Multiplicity="*" />
+          <End Type="Model.Data.empresa" Role="empresa" Multiplicity="1" />
+          <End Type="Model.Data.funcionario" Role="funcionario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="empresa">
               <PropertyRef Name="empresa_id" />
@@ -723,8 +780,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_gestor_to_empresa">
-          <End Role="gestor" Type="SisCadModel.gestor" Multiplicity="1" />
-          <End Role="empresa" Type="SisCadModel.empresa" Multiplicity="*" />
+          <End Type="Model.Data.gestor" Role="gestor" Multiplicity="1" />
+          <End Type="Model.Data.empresa" Role="empresa" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="gestor">
               <PropertyRef Name="gestor_id" />
@@ -735,8 +792,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_municipio_to_empresa">
-          <End Role="municipio" Type="SisCadModel.municipio" Multiplicity="1" />
-          <End Role="empresa" Type="SisCadModel.empresa" Multiplicity="*" />
+          <End Type="Model.Data.municipio" Role="municipio" Multiplicity="1" />
+          <End Type="Model.Data.empresa" Role="empresa" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="municipio">
               <PropertyRef Name="municipio_id" />
@@ -747,8 +804,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_funcionario_to_ferias">
-          <End Role="funcionario" Type="SisCadModel.funcionario" Multiplicity="1" />
-          <End Role="ferias" Type="SisCadModel.ferias" Multiplicity="*" />
+          <End Type="Model.Data.funcionario" Role="funcionario" Multiplicity="1" />
+          <End Type="Model.Data.ferias" Role="ferias" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="funcionario">
               <PropertyRef Name="funcionario_id" />
@@ -759,8 +816,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_funcionario_to_movimentacao">
-          <End Role="funcionario" Type="SisCadModel.funcionario" Multiplicity="1" />
-          <End Role="movimentacao" Type="SisCadModel.movimentacao" Multiplicity="*" />
+          <End Type="Model.Data.funcionario" Role="funcionario" Multiplicity="1" />
+          <End Type="Model.Data.movimentacao" Role="movimentacao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="funcionario">
               <PropertyRef Name="funcionario_id" />
@@ -771,8 +828,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_municipio_naturalidade_to_funcionario">
-          <End Role="municipio" Type="SisCadModel.municipio" Multiplicity="1" />
-          <End Role="funcionario" Type="SisCadModel.funcionario" Multiplicity="*" />
+          <End Type="Model.Data.municipio" Role="municipio" Multiplicity="1" />
+          <End Type="Model.Data.funcionario" Role="funcionario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="municipio">
               <PropertyRef Name="municipio_id" />
@@ -783,8 +840,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_municipio_to_funcionario">
-          <End Role="municipio" Type="SisCadModel.municipio" Multiplicity="1" />
-          <End Role="funcionario" Type="SisCadModel.funcionario" Multiplicity="*" />
+          <End Type="Model.Data.municipio" Role="municipio" Multiplicity="1" />
+          <End Type="Model.Data.funcionario" Role="funcionario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="municipio">
               <PropertyRef Name="municipio_id" />
@@ -795,8 +852,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_setor_to_funcionario">
-          <End Role="setor" Type="SisCadModel.setor" Multiplicity="1" />
-          <End Role="funcionario" Type="SisCadModel.funcionario" Multiplicity="*" />
+          <End Type="Model.Data.setor" Role="setor" Multiplicity="1" />
+          <End Type="Model.Data.funcionario" Role="funcionario" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="setor">
               <PropertyRef Name="setor_id" />
@@ -806,184 +863,196 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SisCadModelStoreContainer" CdmEntityContainer="SisCadEntities">
           <EntitySetMapping Name="cargo">
-            <EntityTypeMapping TypeName="SisCadModel.cargo">
+            <EntityTypeMapping TypeName="Model.Data.cargo">
               <MappingFragment StoreEntitySet="cargo">
-                <ScalarProperty Name="cargo_id" ColumnName="cargo_id" />
-                <ScalarProperty Name="descricao" ColumnName="descricao" />
                 <ScalarProperty Name="cbo" ColumnName="cbo" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="cargo_id" ColumnName="cargo_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="centro_custo">
-            <EntityTypeMapping TypeName="SisCadModel.centro_custo">
+            <EntityTypeMapping TypeName="Model.Data.centro_custo">
               <MappingFragment StoreEntitySet="centro_custo">
-                <ScalarProperty Name="centro_custo_id" ColumnName="centro_custo_id" />
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
                 <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="centro_custo_id" ColumnName="centro_custo_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="departamento">
-            <EntityTypeMapping TypeName="SisCadModel.departamento">
+            <EntityTypeMapping TypeName="Model.Data.departamento">
               <MappingFragment StoreEntitySet="departamento">
-                <ScalarProperty Name="departamento_id" ColumnName="departamento_id" />
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
-                <ScalarProperty Name="descricao" ColumnName="descricao" />
                 <ScalarProperty Name="empresa_id" ColumnName="empresa_id" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="departamento_id" ColumnName="departamento_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="dependente">
-            <EntityTypeMapping TypeName="SisCadModel.dependente">
+            <EntityTypeMapping TypeName="Model.Data.dependente">
               <MappingFragment StoreEntitySet="dependente">
-                <ScalarProperty Name="dependente_id" ColumnName="dependente_id" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
-                <ScalarProperty Name="data_nascimento" ColumnName="data_nascimento" />
-                <ScalarProperty Name="parentesco" ColumnName="parentesco" />
                 <ScalarProperty Name="funcionario_id" ColumnName="funcionario_id" />
+                <ScalarProperty Name="parentesco" ColumnName="parentesco" />
+                <ScalarProperty Name="data_nascimento" ColumnName="data_nascimento" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="dependente_id" ColumnName="dependente_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="empresa">
-            <EntityTypeMapping TypeName="SisCadModel.empresa">
+            <EntityTypeMapping TypeName="Model.Data.empresa">
               <MappingFragment StoreEntitySet="empresa">
-                <ScalarProperty Name="empresa_id" ColumnName="empresa_id" />
-                <ScalarProperty Name="caminho_logo" ColumnName="caminho_logo" />
-                <ScalarProperty Name="razao_social" ColumnName="razao_social" />
-                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
-                <ScalarProperty Name="endereco" ColumnName="endereco" />
-                <ScalarProperty Name="numero" ColumnName="numero" />
-                <ScalarProperty Name="bairro" ColumnName="bairro" />
-                <ScalarProperty Name="complemento" ColumnName="complemento" />
-                <ScalarProperty Name="cep" ColumnName="cep" />
-                <ScalarProperty Name="municipio_id" ColumnName="municipio_id" />
+                <ScalarProperty Name="logo" ColumnName="logo" />
                 <ScalarProperty Name="gestor_id" ColumnName="gestor_id" />
+                <ScalarProperty Name="municipio_id" ColumnName="municipio_id" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="complemento" ColumnName="complemento" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="endereco" ColumnName="endereco" />
+                <ScalarProperty Name="cnpj" ColumnName="cnpj" />
+                <ScalarProperty Name="razao_social" ColumnName="razao_social" />
+                <ScalarProperty Name="empresa_id" ColumnName="empresa_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ferias">
-            <EntityTypeMapping TypeName="SisCadModel.ferias">
+            <EntityTypeMapping TypeName="Model.Data.ferias">
               <MappingFragment StoreEntitySet="ferias">
-                <ScalarProperty Name="ferias_id" ColumnName="ferias_id" />
-                <ScalarProperty Name="inicio_aquisicao" ColumnName="inicio_aquisicao" />
-                <ScalarProperty Name="fim_aquisicao" ColumnName="fim_aquisicao" />
-                <ScalarProperty Name="abono_pecuniario" ColumnName="abono_pecuniario" />
-                <ScalarProperty Name="inicio_gozo" ColumnName="inicio_gozo" />
-                <ScalarProperty Name="fim_gozo" ColumnName="fim_gozo" />
+                <ScalarProperty Name="fim_abono" ColumnName="fim_abono" />
+                <ScalarProperty Name="inicio_abono" ColumnName="inicio_abono" />
                 <ScalarProperty Name="funcionario_id" ColumnName="funcionario_id" />
+                <ScalarProperty Name="fim_gozo" ColumnName="fim_gozo" />
+                <ScalarProperty Name="inicio_gozo" ColumnName="inicio_gozo" />
+                <ScalarProperty Name="abono_pecuniario" ColumnName="abono_pecuniario" />
+                <ScalarProperty Name="fim_aquisicao" ColumnName="fim_aquisicao" />
+                <ScalarProperty Name="inicio_aquisicao" ColumnName="inicio_aquisicao" />
+                <ScalarProperty Name="ferias_id" ColumnName="ferias_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="funcionario">
-            <EntityTypeMapping TypeName="SisCadModel.funcionario">
+            <EntityTypeMapping TypeName="Model.Data.funcionario">
               <MappingFragment StoreEntitySet="funcionario">
-                <ScalarProperty Name="funcionario_id" ColumnName="funcionario_id" />
-                <ScalarProperty Name="matricula" ColumnName="matricula" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
-                <ScalarProperty Name="data_nascimento" ColumnName="data_nascimento" />
-                <ScalarProperty Name="sexo" ColumnName="sexo" />
-                <ScalarProperty Name="endereco" ColumnName="endereco" />
-                <ScalarProperty Name="numero" ColumnName="numero" />
-                <ScalarProperty Name="bairro" ColumnName="bairro" />
-                <ScalarProperty Name="cep" ColumnName="cep" />
-                <ScalarProperty Name="municipio_id" ColumnName="municipio_id" />
-                <ScalarProperty Name="municipio_id_naturalidade" ColumnName="municipio_id_naturalidade" />
-                <ScalarProperty Name="telefone_residencial" ColumnName="telefone_residencial" />
-                <ScalarProperty Name="telefone_celular" ColumnName="telefone_celular" />
-                <ScalarProperty Name="telefone_recado" ColumnName="telefone_recado" />
-                <ScalarProperty Name="estado_civil" ColumnName="estado_civil" />
-                <ScalarProperty Name="grau_instrucao" ColumnName="grau_instrucao" />
-                <ScalarProperty Name="cor" ColumnName="cor" />
-                <ScalarProperty Name="rg" ColumnName="rg" />
-                <ScalarProperty Name="data_emissao_rg" ColumnName="data_emissao_rg" />
-                <ScalarProperty Name="orgao_emissor_rg" ColumnName="orgao_emissor_rg" />
-                <ScalarProperty Name="cpf" ColumnName="cpf" />
-                <ScalarProperty Name="pis" ColumnName="pis" />
-                <ScalarProperty Name="ctps" ColumnName="ctps" />
-                <ScalarProperty Name="serie" ColumnName="serie" />
-                <ScalarProperty Name="data_expedicao_ctps" ColumnName="data_expedicao_ctps" />
-                <ScalarProperty Name="data_expedicao_cnh" ColumnName="data_expedicao_cnh" />
-                <ScalarProperty Name="titulo_eleitor" ColumnName="titulo_eleitor" />
-                <ScalarProperty Name="zona" ColumnName="zona" />
-                <ScalarProperty Name="secao" ColumnName="secao" />
-                <ScalarProperty Name="cnh" ColumnName="cnh" />
-                <ScalarProperty Name="categoria_cnh" ColumnName="categoria_cnh" />
-                <ScalarProperty Name="data_admissao" ColumnName="data_admissao" />
-                <ScalarProperty Name="salario_inicial" ColumnName="salario_inicial" />
-                <ScalarProperty Name="salario_atual" ColumnName="salario_atual" />
-                <ScalarProperty Name="setor_id" ColumnName="setor_id" />
-                <ScalarProperty Name="cargo_id" ColumnName="cargo_id" />
-                <ScalarProperty Name="cargo_contratacao_id" ColumnName="cargo_contratacao_id" />
-                <ScalarProperty Name="caminho_foto" ColumnName="caminho_foto" />
-                <ScalarProperty Name="ativo" ColumnName="ativo" />
-                <ScalarProperty Name="empresa_id" ColumnName="empresa_id" />
-                <ScalarProperty Name="mae" ColumnName="mae" />
+                <ScalarProperty Name="nacionalidade" ColumnName="nacionalidade" />
+                <ScalarProperty Name="vinculo" ColumnName="vinculo" />
+                <ScalarProperty Name="digito_conta" ColumnName="digito_conta" />
+                <ScalarProperty Name="numero_conta" ColumnName="numero_conta" />
+                <ScalarProperty Name="digito_agencia" ColumnName="digito_agencia" />
+                <ScalarProperty Name="agencia" ColumnName="agencia" />
+                <ScalarProperty Name="banco" ColumnName="banco" />
+                <ScalarProperty Name="data_publicacao" ColumnName="data_publicacao" />
+                <ScalarProperty Name="portaria_decreto" ColumnName="portaria_decreto" />
+                <ScalarProperty Name="foto" ColumnName="foto" />
                 <ScalarProperty Name="pai" ColumnName="pai" />
+                <ScalarProperty Name="mae" ColumnName="mae" />
+                <ScalarProperty Name="empresa_id" ColumnName="empresa_id" />
+                <ScalarProperty Name="ativo" ColumnName="ativo" />
+                <ScalarProperty Name="cargo_contratacao_id" ColumnName="cargo_contratacao_id" />
+                <ScalarProperty Name="cargo_id" ColumnName="cargo_id" />
+                <ScalarProperty Name="setor_id" ColumnName="setor_id" />
+                <ScalarProperty Name="salario_atual" ColumnName="salario_atual" />
+                <ScalarProperty Name="salario_inicial" ColumnName="salario_inicial" />
+                <ScalarProperty Name="data_admissao" ColumnName="data_admissao" />
+                <ScalarProperty Name="categoria_cnh" ColumnName="categoria_cnh" />
+                <ScalarProperty Name="cnh" ColumnName="cnh" />
+                <ScalarProperty Name="secao" ColumnName="secao" />
+                <ScalarProperty Name="zona" ColumnName="zona" />
+                <ScalarProperty Name="titulo_eleitor" ColumnName="titulo_eleitor" />
+                <ScalarProperty Name="data_expedicao_cnh" ColumnName="data_expedicao_cnh" />
+                <ScalarProperty Name="data_expedicao_ctps" ColumnName="data_expedicao_ctps" />
+                <ScalarProperty Name="serie" ColumnName="serie" />
+                <ScalarProperty Name="ctps" ColumnName="ctps" />
+                <ScalarProperty Name="pis" ColumnName="pis" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="orgao_emissor_rg" ColumnName="orgao_emissor_rg" />
+                <ScalarProperty Name="data_emissao_rg" ColumnName="data_emissao_rg" />
+                <ScalarProperty Name="rg" ColumnName="rg" />
+                <ScalarProperty Name="cor" ColumnName="cor" />
+                <ScalarProperty Name="grau_instrucao" ColumnName="grau_instrucao" />
+                <ScalarProperty Name="estado_civil" ColumnName="estado_civil" />
+                <ScalarProperty Name="telefone_recado" ColumnName="telefone_recado" />
+                <ScalarProperty Name="telefone_celular" ColumnName="telefone_celular" />
+                <ScalarProperty Name="telefone_residencial" ColumnName="telefone_residencial" />
+                <ScalarProperty Name="municipio_id_naturalidade" ColumnName="municipio_id_naturalidade" />
+                <ScalarProperty Name="municipio_id" ColumnName="municipio_id" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="endereco" ColumnName="endereco" />
+                <ScalarProperty Name="sexo" ColumnName="sexo" />
+                <ScalarProperty Name="data_nascimento" ColumnName="data_nascimento" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="matricula" ColumnName="matricula" />
+                <ScalarProperty Name="funcionario_id" ColumnName="funcionario_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="gestor">
-            <EntityTypeMapping TypeName="SisCadModel.gestor">
+            <EntityTypeMapping TypeName="Model.Data.gestor">
               <MappingFragment StoreEntitySet="gestor">
-                <ScalarProperty Name="nome" ColumnName="nome" />
-                <ScalarProperty Name="gestor_id" ColumnName="gestor_id" />
-                <ScalarProperty Name="cpf" ColumnName="cpf" />
-                <ScalarProperty Name="nascimento" ColumnName="nascimento" />
-                <ScalarProperty Name="endereco" ColumnName="endereco" />
-                <ScalarProperty Name="numero" ColumnName="numero" />
-                <ScalarProperty Name="complemento" ColumnName="complemento" />
-                <ScalarProperty Name="bairro" ColumnName="bairro" />
-                <ScalarProperty Name="inicio_gestao" ColumnName="inicio_gestao" />
+                <ScalarProperty Name="municipio_id" ColumnName="municipio_id" />
                 <ScalarProperty Name="fim_gestao" ColumnName="fim_gestao" />
+                <ScalarProperty Name="inicio_gestao" ColumnName="inicio_gestao" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="complemento" ColumnName="complemento" />
+                <ScalarProperty Name="numero" ColumnName="numero" />
+                <ScalarProperty Name="endereco" ColumnName="endereco" />
+                <ScalarProperty Name="nascimento" ColumnName="nascimento" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="gestor_id" ColumnName="gestor_id" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="movimentacao">
-            <EntityTypeMapping TypeName="SisCadModel.movimentacao">
+            <EntityTypeMapping TypeName="Model.Data.movimentacao">
               <MappingFragment StoreEntitySet="movimentacao">
-                <ScalarProperty Name="movimentacao_id" ColumnName="movimentacao_id" />
-                <ScalarProperty Name="descricao" ColumnName="descricao" />
-                <ScalarProperty Name="data_saida" ColumnName="data_saida" />
-                <ScalarProperty Name="data_retorno" ColumnName="data_retorno" />
-                <ScalarProperty Name="funcionario_id" ColumnName="funcionario_id" />
                 <ScalarProperty Name="tipo_movimentacao" ColumnName="tipo_movimentacao" />
+                <ScalarProperty Name="funcionario_id" ColumnName="funcionario_id" />
+                <ScalarProperty Name="data_retorno" ColumnName="data_retorno" />
+                <ScalarProperty Name="data_saida" ColumnName="data_saida" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="movimentacao_id" ColumnName="movimentacao_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="municipio">
-            <EntityTypeMapping TypeName="SisCadModel.municipio">
+            <EntityTypeMapping TypeName="Model.Data.municipio">
               <MappingFragment StoreEntitySet="municipio">
-                <ScalarProperty Name="municipio_id" ColumnName="municipio_id" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
                 <ScalarProperty Name="uf" ColumnName="uf" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="municipio_id" ColumnName="municipio_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="setor">
-            <EntityTypeMapping TypeName="SisCadModel.setor">
+            <EntityTypeMapping TypeName="Model.Data.setor">
               <MappingFragment StoreEntitySet="setor">
-                <ScalarProperty Name="setor_id" ColumnName="setor_id" />
-                <ScalarProperty Name="codigo" ColumnName="codigo" />
-                <ScalarProperty Name="descricao" ColumnName="descricao" />
-                <ScalarProperty Name="departamento_id" ColumnName="departamento_id" />
                 <ScalarProperty Name="centro_custo_id" ColumnName="centro_custo_id" />
+                <ScalarProperty Name="departamento_id" ColumnName="departamento_id" />
+                <ScalarProperty Name="descricao" ColumnName="descricao" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="setor_id" ColumnName="setor_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="usuario">
-            <EntityTypeMapping TypeName="SisCadModel.usuario">
+            <EntityTypeMapping TypeName="Model.Data.usuario">
               <MappingFragment StoreEntitySet="usuario">
-                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
-                <ScalarProperty Name="nome" ColumnName="nome" />
-                <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="senha" ColumnName="senha" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1007,6 +1076,111 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams>
+      <Diagram Name="SisCadModel" ZoomLevel="83">
+        <EntityTypeShape EntityType="Model.Data.cargo" Width="1.5" PointX="7.5" PointY="1.875" Height="1.9802864583333388" />
+        <EntityTypeShape EntityType="Model.Data.centro_custo" Width="1.5" PointX="5.25" PointY="3" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="Model.Data.departamento" Width="1.5" PointX="5.25" PointY="5.75" Height="2.172587890624996" />
+        <EntityTypeShape EntityType="Model.Data.dependente" Width="1.5" PointX="12" PointY="2.625" Height="2.1725878906250031" />
+        <EntityTypeShape EntityType="Model.Data.empresa" Width="1.5" PointX="3" PointY="4.875" Height="3.9033007812499996" />
+        <EntityTypeShape EntityType="Model.Data.ferias" Width="1.5" PointX="12" PointY="5.5" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="Model.Data.funcionario" Width="1.5" PointX="9.75" PointY="1.375" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="Model.Data.gestor" Width="1.5" PointX="0.75" PointY="1.375" Height="3.1340950520833388" />
+        <EntityTypeShape EntityType="Model.Data.movimentacao" Width="1.5" PointX="12" PointY="8.875" Height="2.3648893229166656" />
+        <EntityTypeShape EntityType="Model.Data.municipio" Width="1.5" PointX="0.75" PointY="5.75" Height="2.1725878906250067" />
+        <EntityTypeShape EntityType="Model.Data.setor" Width="1.5" PointX="7.5" PointY="5.625" Height="2.5571907552083246" />
+        <EntityTypeShape EntityType="Model.Data.usuario" Width="1.5" PointX="0.75" PointY="9.75" Height="1.7879850260416674" />
+        <AssociationConnector Association="Model.Data.fk_cargo_atual_to_funcionario" >
+          <ConnectorPoint PointX="9" PointY="3.2136254882812536" />
+          <ConnectorPoint PointX="9.75" PointY="3.2136254882812536" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.Data.fk_cargo_contratado_to_funcionario" >
+          <ConnectorPoint PointX="9" PointY="2.481812744140627" />
+          <ConnectorPoint PointX="9.75" PointY="2.481812744140627" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.Data.fk_centro_custo_to_setor" >
+          <ConnectorPoint PointX="6.75" PointY="4.7879850260416674" />
+          <ConnectorPoint PointX="7.125" PointY="5.1629850260416674" />
+          <ConnectorPoint PointX="7.125" PointY="6.9035953776041623" />
+          <ConnectorPoint PointX="7.5" PointY="6.9035953776041623" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.Data.fk_departamento_to_setor" >
+          <ConnectorPoint PointX="6.75" PointY="6.2642976888020812" />
+          <ConnectorPoint PointX="7.041666666666667" PointY="6.26429768880208" />
+          <ConnectorPoint PointX="7.208333333333333" PointY="6.2642976888020812" />
+          <ConnectorPoint PointX="7.5" PointY="6.2642976888020812" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.Data.fk_empresa_to_departamento" >
+          <ConnectorPoint PointX="4.5" PointY="6.836293945312498" />
+          <ConnectorPoint PointX="5.25" PointY="6.836293945312498" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.Data.fk_funcionario_to_dependente" >
+          <ConnectorPoint PointX="11.25" PointY="3.37474609375" />
+          <ConnectorPoint PointX="12" PointY="3.37474609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.Data.fk_empresa_to_funcionario" >
+          <ConnectorPoint PointX="4.1562525" PointY="4.875" />
+          <ConnectorPoint PointX="4.1562525" PointY="1.59375" />
+          <ConnectorPoint PointX="9.75" PointY="1.59375" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.Data.fk_gestor_to_empresa" >
+          <ConnectorPoint PointX="2.25" PointY="2.9420475260416694" />
+          <ConnectorPoint PointX="3.75" PointY="2.9420475260416694" />
+          <ConnectorPoint PointX="3.75" PointY="4.875" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.Data.fk_municipio_to_empresa" >
+          <ConnectorPoint PointX="2.25" PointY="6.8362939453125033" />
+          <ConnectorPoint PointX="3" PointY="6.8362939453125033" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.Data.fk_funcionario_to_ferias" >
+          <ConnectorPoint PointX="10.5312525" PointY="4.1244921875" />
+          <ConnectorPoint PointX="10.5312525" PointY="6.8839661658819491" />
+          <ConnectorPoint PointX="10.838545416666667" PointY="6.8839661658819482" />
+          <ConnectorPoint PointX="11.005212083333335" PointY="6.8839661658819491" />
+          <ConnectorPoint PointX="12" PointY="6.8839661658819491" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.Data.fk_funcionario_to_movimentacao" >
+          <ConnectorPoint PointX="11.25" PointY="10.057444661458334" />
+          <ConnectorPoint PointX="12" PointY="10.057444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.Data.fk_municipio_naturalidade_to_funcionario" >
+          <ConnectorPoint PointX="2.25" PointY="6.8675459453125036" />
+          <ConnectorPoint PointX="2.75" PointY="6.8675459453125036" />
+          <ConnectorPoint PointX="2.75" PointY="4.625" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="4.6249999999999991" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="4.625" />
+          <ConnectorPoint PointX="4.0729191666666669" PointY="4.6249999999999991" />
+          <ConnectorPoint PointX="4.2395858333333329" PointY="4.625" />
+          <ConnectorPoint PointX="5" PointY="4.625" />
+          <ConnectorPoint PointX="5" PointY="5.0379850260416674" />
+          <ConnectorPoint PointX="6.916666666666667" PointY="5.0379850260416665" />
+          <ConnectorPoint PointX="7.083333333333333" PointY="5.0379850260416674" />
+          <ConnectorPoint PointX="10.10937425" PointY="5.0379850260416674" />
+          <ConnectorPoint PointX="10.10937425" PointY="4.1244921875" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.Data.fk_municipio_to_funcionario" >
+          <ConnectorPoint PointX="2.25" PointY="6.2775209726562515" />
+          <ConnectorPoint PointX="2.6666666666666665" PointY="6.2775209726562506" />
+          <ConnectorPoint PointX="2.8333333333333335" PointY="6.2775209726562515" />
+          <ConnectorPoint PointX="2.875" PointY="6.2775209726562515" />
+          <ConnectorPoint PointX="2.875" PointY="4.609375" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="4.6093749999999991" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="4.609375" />
+          <ConnectorPoint PointX="4.0729191666666669" PointY="4.6093749999999991" />
+          <ConnectorPoint PointX="4.2395858333333329" PointY="4.609375" />
+          <ConnectorPoint PointX="4.75" PointY="4.609375" />
+          <ConnectorPoint PointX="4.75" PointY="5.0536100260416674" />
+          <ConnectorPoint PointX="6.932291666666667" PointY="5.0536100260416665" />
+          <ConnectorPoint PointX="7.098958333333333" PointY="5.0536100260416674" />
+          <ConnectorPoint PointX="9.8984351249999989" PointY="5.0536100260416674" />
+          <ConnectorPoint PointX="9.8984351249999989" PointY="4.1244921875" />
+        </AssociationConnector>
+        <AssociationConnector Association="Model.Data.fk_setor_to_funcionario" >
+          <ConnectorPoint PointX="9" PointY="7.5330784605451369" />
+          <ConnectorPoint PointX="10.320313375000001" PointY="7.5330784605451369" />
+          <ConnectorPoint PointX="10.320313375000001" PointY="4.1244921875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
   </Designer>
 </edmx:Edmx>

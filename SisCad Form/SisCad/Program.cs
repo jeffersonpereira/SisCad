@@ -15,7 +15,12 @@ namespace SisCad.Forms
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmPrincipal());
+            frmLogin form = new frmLogin();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                Application.Run(new frmPrincipal());
+            }
+            //Application.Run(new frmPrincipal());
         }
     }
 }

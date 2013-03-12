@@ -13,6 +13,7 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,7 +26,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -49,6 +49,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.Charts.v12.2.Core, Version=12.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Data.v12.2, Version=12.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v12.2.Core, Version=12.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.PivotGrid.v12.2.Core, Version=12.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v12.2.Core, Version=12.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.RichEdit.v12.2.Core, Version=12.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v12.2, Version=12.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Utils.v12.2.UI, Version=12.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraCharts.v12.2, Version=12.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v12.2, Version=12.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraPrinting.v12.2, Version=12.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v12.2, Version=12.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraReports.v12.2.Extensions, Version=12.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Program Files (x86)\Microsoft ADO.NET Entity Framework 4.1\Binaries\EntityFramework.dll</HintPath>
@@ -69,7 +82,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataContext.cs" />
+    <Compile Include="Context.cs" />
+    <Compile Include="DataSearch.cs" />
     <Compile Include="Forms\frmCentroCusto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +95,12 @@
     </Compile>
     <Compile Include="Forms\frmDepartamento.Designer.cs">
       <DependentUpon>frmDepartamento.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmDependente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmDependente.Designer.cs">
+      <DependentUpon>frmDependente.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmEmpresa.cs">
       <SubType>Form</SubType>
@@ -100,11 +120,23 @@
     <Compile Include="Forms\frmFuncionario.Designer.cs">
       <DependentUpon>frmFuncionario.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmMunicipioPopup.cs">
+    <Compile Include="Forms\frmGestor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmMunicipioPopup.Designer.cs">
-      <DependentUpon>frmMunicipioPopup.cs</DependentUpon>
+    <Compile Include="Forms\frmGestor.Designer.cs">
+      <DependentUpon>frmGestor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmMovimentacao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmMovimentacao.Designer.cs">
+      <DependentUpon>frmMovimentacao.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmPrincipal.cs">
       <SubType>Form</SubType>
@@ -112,11 +144,23 @@
     <Compile Include="Forms\frmPrincipal.Designer.cs">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmResponsavel.cs">
+    <Compile Include="Forms\frmRptFicha.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmResponsavel.Designer.cs">
-      <DependentUpon>frmResponsavel.cs</DependentUpon>
+    <Compile Include="Forms\frmRptFicha.Designer.cs">
+      <DependentUpon>frmRptFicha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSelecaoEmpresa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSelecaoEmpresa.Designer.cs">
+      <DependentUpon>frmSelecaoEmpresa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSelecaoFuncionario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSelecaoFuncionario.Designer.cs">
+      <DependentUpon>frmSelecaoFuncionario.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\frmSetor.cs">
       <SubType>Form</SubType>
@@ -124,32 +168,55 @@
     <Compile Include="Forms\frmSetor.Designer.cs">
       <DependentUpon>frmSetor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\frmUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmUsuario.Designer.cs">
+      <DependentUpon>frmUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\LoadPicture.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\LoadPicture.Designer.cs">
+      <DependentUpon>LoadPicture.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Lookup.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Lookup.Designer.cs">
       <DependentUpon>Lookup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PesquisaMunicipio.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\PesquisaMunicipio.Designer.cs">
-      <DependentUpon>PesquisaMunicipio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmBase.cs">
+    <Compile Include="Forms\frmBase.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmBase.Designer.cs">
+    <Compile Include="Forms\frmBase.Designer.cs">
       <DependentUpon>frmBase.cs</DependentUpon>
     </Compile>
-    <Compile Include="ISelecteObject.cs" />
+    <Compile Include="Forms\frmPesquisa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPesquisa.Designer.cs">
+      <DependentUpon>frmPesquisa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Relatório\RptFicha.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Relatório\RptFicha.Designer.cs">
+      <DependentUpon>RptFicha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Search.cs" />
+    <Compile Include="SearchSelectedEventArgs.cs" />
+    <Compile Include="SetValue.cs" />
     <EmbeddedResource Include="Forms\frmCentroCusto.resx">
       <DependentUpon>frmCentroCusto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmDepartamento.resx">
       <DependentUpon>frmDepartamento.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmDependente.resx">
+      <DependentUpon>frmDependente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmEmpresa.resx">
       <DependentUpon>frmEmpresa.cs</DependentUpon>
@@ -160,33 +227,60 @@
     <EmbeddedResource Include="Forms\frmFuncionario.resx">
       <DependentUpon>frmFuncionario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmMunicipioPopup.resx">
-      <DependentUpon>frmMunicipioPopup.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmGestor.resx">
+      <DependentUpon>frmGestor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmMovimentacao.resx">
+      <DependentUpon>frmMovimentacao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmPrincipal.resx">
       <DependentUpon>frmPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmResponsavel.resx">
-      <DependentUpon>frmResponsavel.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\frmRptFicha.resx">
+      <DependentUpon>frmRptFicha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSelecaoEmpresa.resx">
+      <DependentUpon>frmSelecaoEmpresa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSelecaoFuncionario.resx">
+      <DependentUpon>frmSelecaoFuncionario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\frmSetor.resx">
       <DependentUpon>frmSetor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmUsuario.resx">
+      <DependentUpon>frmUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoadPicture.resx">
+      <DependentUpon>LoadPicture.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Lookup.resx">
       <DependentUpon>Lookup.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PesquisaMunicipio.resx">
-      <DependentUpon>PesquisaMunicipio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmBase.resx">
+    <EmbeddedResource Include="Forms\frmBase.resx">
       <DependentUpon>frmBase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPesquisa.resx">
+      <DependentUpon>frmPesquisa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Relatório\RptFicha.resx">
+      <DependentUpon>RptFicha.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.Config" />
+    <None Include="Properties\DataSources\Model.Data.dependente.datasource" />
+    <None Include="Properties\DataSources\Model.Data.funcionario.datasource" />
+    <None Include="Properties\DataSources\Model.Data.gestor.datasource" />
+    <None Include="Properties\DataSources\Model.Data.movimentacao.datasource" />
+    <None Include="Properties\DataSources\Model.Data.usuario.datasource" />
     <None Include="Properties\DataSources\SisCadLibrary.Data.cargo.datasource" />
     <None Include="Properties\DataSources\SisCadLibrary.Data.centro_custo.datasource" />
     <None Include="Properties\DataSources\SisCadLibrary.Data.departamento.datasource" />
@@ -281,6 +375,22 @@
   <ItemGroup>
     <None Include="Resources\edit.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit_trash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_siscad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_siscad1.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace Data.Entidades
+namespace Model.Data
 {
     [MetadataType(typeof(Cargo_Metadata))]
-    public partial class cargo
+    public partial class cargo : IValidade
     {
         public override string ToString()
         {
@@ -19,6 +19,14 @@ namespace Data.Entidades
         public string cbo { get; set; }
         public virtual List<funcionario> funcionario { get; set; }
         public virtual List<funcionario> funcionario_contratacao { get; set; }
+
+        public List<ValidationResult> GetValidationResult()
+        {
+            ValidationContext context = new ValidationContext(this, null, null);
+            List<ValidationResult> result = new List<ValidationResult>();
+            Validator.TryValidateObject(this, context, result);
+            return result;
+        }
     }
 
     public partial class Cargo_Metadata

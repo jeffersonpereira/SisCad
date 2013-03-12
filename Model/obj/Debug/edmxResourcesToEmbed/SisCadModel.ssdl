@@ -29,6 +29,10 @@
       <End Role="departamento" EntitySet="departamento" />
       <End Role="setor" EntitySet="setor" />
     </AssociationSet>
+    <AssociationSet Name="fk_empresa_to_departamento" Association="SisCadModel.Store.fk_empresa_to_departamento">
+      <End Role="empresa" EntitySet="empresa" />
+      <End Role="departamento" EntitySet="departamento" />
+    </AssociationSet>
     <AssociationSet Name="fk_empresa_to_funcionario" Association="SisCadModel.Store.fk_empresa_to_funcionario">
       <End Role="empresa" EntitySet="empresa" />
       <End Role="funcionario" EntitySet="funcionario" />
@@ -98,7 +102,7 @@
     <Property Name="dependente_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="nome" Type="varchar" Nullable="false" MaxLength="100" />
     <Property Name="data_nascimento" Type="datetime" />
-    <Property Name="parentesco" Type="int" Nullable="false" />
+    <Property Name="parentesco" Type="varchar" Nullable="false" MaxLength="256" />
     <Property Name="funcionario_id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="empresa">
@@ -106,7 +110,7 @@
       <PropertyRef Name="empresa_id" />
     </Key>
     <Property Name="empresa_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="caminho_logo" Type="varchar" MaxLength="256" />
+    <Property Name="logo" Type="image" />
     <Property Name="razao_social" Type="varchar" Nullable="false" MaxLength="150" />
     <Property Name="cnpj" Type="char" Nullable="false" MaxLength="14" />
     <Property Name="endereco" Type="varchar" MaxLength="50" />
@@ -127,7 +131,9 @@
     <Property Name="abono_pecuniario" Type="bit" Nullable="false" />
     <Property Name="inicio_gozo" Type="datetime" Nullable="false" />
     <Property Name="fim_gozo" Type="datetime" Nullable="false" />
+    <Property Name="inicio_abono" Type="datetime" />
     <Property Name="funcionario_id" Type="int" Nullable="false" />
+    <Property Name="fim_abono" Type="datetime" />
   </EntityType>
   <EntityType Name="funcionario">
     <Key>
@@ -147,9 +153,9 @@
     <Property Name="telefone_residencial" Type="char" MaxLength="10" />
     <Property Name="telefone_celular" Type="char" MaxLength="10" />
     <Property Name="telefone_recado" Type="char" MaxLength="10" />
-    <Property Name="estado_civil" Type="int" Nullable="false" />
-    <Property Name="grau_instrucao" Type="int" Nullable="false" />
-    <Property Name="cor" Type="int" Nullable="false" />
+    <Property Name="estado_civil" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="grau_instrucao" Type="varchar" Nullable="false" MaxLength="256" />
+    <Property Name="cor" Type="varchar" Nullable="false" MaxLength="50" />
     <Property Name="rg" Type="char" MaxLength="20" />
     <Property Name="data_emissao_rg" Type="datetime" />
     <Property Name="orgao_emissor_rg" Type="char" MaxLength="6" />
@@ -170,11 +176,20 @@
     <Property Name="setor_id" Type="int" Nullable="false" />
     <Property Name="cargo_id" Type="int" Nullable="false" />
     <Property Name="cargo_contratacao_id" Type="int" Nullable="false" />
-    <Property Name="caminho_foto" Type="varchar" MaxLength="256" />
     <Property Name="ativo" Type="bit" Nullable="false" />
     <Property Name="empresa_id" Type="int" Nullable="false" />
     <Property Name="mae" Type="varchar" MaxLength="100" />
     <Property Name="pai" Type="varchar" MaxLength="100" />
+    <Property Name="foto" Type="image" />
+    <Property Name="portaria_decreto" Type="char" MaxLength="20" />
+    <Property Name="data_publicacao" Type="datetime" />
+    <Property Name="banco" Type="varchar" MaxLength="100" />
+    <Property Name="agencia" Type="int" />
+    <Property Name="digito_agencia" Type="char" MaxLength="1" />
+    <Property Name="numero_conta" Type="int" />
+    <Property Name="digito_conta" Type="char" MaxLength="1" />
+    <Property Name="vinculo" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="nacionalidade" Type="varchar" Nullable="false" MaxLength="100" />
   </EntityType>
   <EntityType Name="gestor">
     <Key>
@@ -190,6 +205,7 @@
     <Property Name="bairro" Type="varchar" MaxLength="20" />
     <Property Name="inicio_gestao" Type="datetime" />
     <Property Name="fim_gestao" Type="datetime" />
+    <Property Name="municipio_id" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="movimentacao">
     <Key>
@@ -200,7 +216,7 @@
     <Property Name="data_saida" Type="datetime" Nullable="false" />
     <Property Name="data_retorno" Type="datetime" />
     <Property Name="funcionario_id" Type="int" Nullable="false" />
-    <Property Name="tipo_movimentacao" Type="int" Nullable="false" />
+    <Property Name="tipo_movimentacao" Type="varchar" Nullable="false" MaxLength="256" />
   </EntityType>
   <EntityType Name="municipio">
     <Key>
@@ -274,6 +290,18 @@
       </Principal>
       <Dependent Role="setor">
         <PropertyRef Name="departamento_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_empresa_to_departamento">
+    <End Role="empresa" Type="SisCadModel.Store.empresa" Multiplicity="1" />
+    <End Role="departamento" Type="SisCadModel.Store.departamento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="empresa">
+        <PropertyRef Name="empresa_id" />
+      </Principal>
+      <Dependent Role="departamento">
+        <PropertyRef Name="empresa_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

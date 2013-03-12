@@ -59,7 +59,7 @@
             // 
             // centro_custoBindingSource
             // 
-            this.centro_custoBindingSource.DataSource = typeof(Data.Entidades.centro_custo);
+            this.centro_custoBindingSource.DataSource = typeof(Model.Data.centro_custo);
             // 
             // descricaoTextBox
             // 

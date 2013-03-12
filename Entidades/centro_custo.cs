@@ -4,24 +4,35 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace Data.Entidades
+namespace Model.Data
 {
-    [MetadataType(typeof(CentroCusto_Metadata))]
-    public partial class centro_custo
+    public partial class centro_custo : IValidade
     {
-        public int centro_custo_id { get; set; }
-        public int codigo { get; set; }
-        public string descricao { get; set; }
-        public ICollection<setor> setor { get; set; }
-    }
+        public centro_custo()
+        {
+            
+        }
 
-    public class CentroCusto_Metadata
-    {
+        public override string ToString()
+        {
+            return this.descricao;
+        }
+
         [Key]
         public int centro_custo_id { get; set; }
+        public int codigo { get; set; }
 
-        [Required(ErrorMessage="Campo Descrição é obrigatório.")]
-        [Display(Name="Descrição")]
+        [Required(ErrorMessage = "Campo Descrição é obrigatório.")]
+        [Display(Name = "Descrição")]
         public string descricao { get; set; }
+        public ICollection<setor> setor { get; set; }
+
+        public List<ValidationResult> GetValidationResult()
+        {
+            ValidationContext context = new ValidationContext(this, null, null);
+            List<ValidationResult> result = new List<ValidationResult>();
+            Validator.TryValidateObject(this, context, result);
+            return result;
+        }
     }
 }

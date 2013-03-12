@@ -4,25 +4,34 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace Data.Entidades
+namespace Model.Data
 {
-    [MetadataType(typeof(Departamento_Metadata))]
-    public partial class departamento
+    public partial class departamento : IValidade
     {
-        public int departamento_id { get; set; }
-        public int codigo { get; set; }
-        public string descricao { get; set; }
-        public int empresa_id { get; set; }
-        IList<setor> setor { get; set; }
-    }
 
-    public class Departamento_Metadata
-    {
+        public override string ToString()
+        {
+            return this.descricao;
+        }
+
         [Key]
         public int departamento_id { get; set; }
+        public int codigo { get; set; }
 
         [Required(ErrorMessage = "Campo Descrição é obrigatório.")]
-        [Display(Name="Descrição")]
         public string descricao { get; set; }
+
+        [Required(ErrorMessage = "Campo Empresa é obrigatório.")]
+        public empresa empresa { get; set; }
+        public int empresa_id { get; set; }
+        IList<setor> setor { get; set; }
+
+        public List<ValidationResult> GetValidationResult()
+        {
+            ValidationContext context = new ValidationContext(this, null, null);
+            List<ValidationResult> result = new List<ValidationResult>();
+            bool valid = Validator.TryValidateObject(this, context, result, true);
+            return result;
+        }
     }
 }

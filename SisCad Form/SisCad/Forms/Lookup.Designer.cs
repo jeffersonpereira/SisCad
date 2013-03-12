@@ -28,34 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.valueTextBox = new System.Windows.Forms.TextBox();
             this.labelTitulo = new System.Windows.Forms.Label();
+            this.btnShow = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // valueTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(0, 16);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(50, 20);
-            this.textBox1.TabIndex = 0;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(48, 16);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(259, 20);
-            this.textBox2.TabIndex = 1;
-            // 
-            // button1
-            // 
-            this.button1.Image = global::SisCad.Properties.Resources.system_search;
-            this.button1.Location = new System.Drawing.Point(307, 15);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(38, 22);
-            this.button1.TabIndex = 2;
-            this.button1.UseVisualStyleBackColor = true;
+            this.valueTextBox.Location = new System.Drawing.Point(0, 16);
+            this.valueTextBox.Name = "valueTextBox";
+            this.valueTextBox.Size = new System.Drawing.Size(292, 20);
+            this.valueTextBox.TabIndex = 1;
             // 
             // labelTitulo
             // 
@@ -66,16 +50,34 @@
             this.labelTitulo.TabIndex = 3;
             this.labelTitulo.Text = "Lookup";
             // 
+            // btnShow
+            // 
+            this.btnShow.Image = global::SisCad.Properties.Resources.system_search;
+            this.btnShow.Location = new System.Drawing.Point(292, 17);
+            this.btnShow.Name = "btnShow";
+            this.btnShow.Size = new System.Drawing.Size(24, 20);
+            this.btnShow.TabIndex = 2;
+            this.btnShow.UseVisualStyleBackColor = true;
+            // 
+            // btnClear
+            // 
+            this.btnClear.Image = global::SisCad.Properties.Resources.edit_trash;
+            this.btnClear.Location = new System.Drawing.Point(315, 17);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(24, 20);
+            this.btnClear.TabIndex = 2;
+            this.btnClear.UseVisualStyleBackColor = true;
+            // 
             // Lookup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.labelTitulo);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnShow);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.valueTextBox);
             this.Name = "Lookup";
-            this.Size = new System.Drawing.Size(345, 37);
+            this.Size = new System.Drawing.Size(341, 37);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -83,9 +85,9 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox valueTextBox;
+        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Label labelTitulo;
+        private System.Windows.Forms.Button btnShow;
     }
 }

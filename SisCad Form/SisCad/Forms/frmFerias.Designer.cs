@@ -33,6 +33,8 @@
             System.Windows.Forms.Label inicio_aquisicaoLabel;
             System.Windows.Forms.Label label1;
             System.Windows.Forms.Label label2;
+            System.Windows.Forms.Label label3;
+            System.Windows.Forms.Label label4;
             this.feriasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.fim_aquisicaoMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -41,14 +43,20 @@
             this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
             this.maskedTextBox2 = new System.Windows.Forms.MaskedTextBox();
             this.abono_pecuniarioCheckBox = new System.Windows.Forms.CheckBox();
-            this.lookup1 = new SisCad.Forms.Lookup();
+            this.funcionarioLookup = new SisCad.Forms.Lookup();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.maskedTextBox3 = new System.Windows.Forms.MaskedTextBox();
+            this.maskedTextBox4 = new System.Windows.Forms.MaskedTextBox();
             fim_aquisicaoLabel = new System.Windows.Forms.Label();
             inicio_aquisicaoLabel = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
+            label3 = new System.Windows.Forms.Label();
+            label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.feriasBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // fim_aquisicaoLabel
@@ -87,9 +95,28 @@
             label2.TabIndex = 1;
             label2.Text = "Fim";
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new System.Drawing.Point(6, 22);
+            label3.Name = "label3";
+            label3.Size = new System.Drawing.Size(32, 13);
+            label3.TabIndex = 2;
+            label3.Text = "Inicio";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new System.Drawing.Point(109, 22);
+            label4.Name = "label4";
+            label4.Size = new System.Drawing.Size(23, 13);
+            label4.TabIndex = 1;
+            label4.Text = "Fim";
+            // 
             // feriasBindingSource
             // 
-            this.feriasBindingSource.DataSource = typeof(Data.Entidades.ferias);
+            this.feriasBindingSource.DataSource = typeof(Model.Data.ferias);
+            this.feriasBindingSource.DataSourceChanged += new System.EventHandler(this.feriasBindingSource_DataSourceChanged);
             // 
             // fim_aquisicaoMaskedTextBox
             // 
@@ -146,7 +173,7 @@
             // 
             // maskedTextBox2
             // 
-            this.maskedTextBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feriasBindingSource, "fim_gozo", true));
+            this.maskedTextBox2.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feriasBindingSource, "fim_gozo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.maskedTextBox2.Location = new System.Drawing.Point(112, 38);
             this.maskedTextBox2.Mask = "00/00/0000";
             this.maskedTextBox2.Name = "maskedTextBox2";
@@ -156,41 +183,73 @@
             // abono_pecuniarioCheckBox
             // 
             this.abono_pecuniarioCheckBox.DataBindings.Add(new System.Windows.Forms.Binding("CheckState", this.feriasBindingSource, "abono_pecuniario", true));
-            this.abono_pecuniarioCheckBox.Location = new System.Drawing.Point(12, 153);
+            this.abono_pecuniarioCheckBox.Location = new System.Drawing.Point(6, -5);
             this.abono_pecuniarioCheckBox.Name = "abono_pecuniarioCheckBox";
             this.abono_pecuniarioCheckBox.Size = new System.Drawing.Size(161, 24);
             this.abono_pecuniarioCheckBox.TabIndex = 4;
             this.abono_pecuniarioCheckBox.Text = "Abono Pecuniário de Férias";
             this.abono_pecuniarioCheckBox.UseVisualStyleBackColor = true;
             // 
-            // lookup1
+            // funcionarioLookup
             // 
-            this.lookup1.Location = new System.Drawing.Point(9, 28);
-            this.lookup1.Name = "lookup1";
-            this.lookup1.Size = new System.Drawing.Size(353, 37);
-            this.lookup1.TabIndex = 5;
+            this.funcionarioLookup.Location = new System.Drawing.Point(9, 28);
+            this.funcionarioLookup.Name = "funcionarioLookup";
+            this.funcionarioLookup.Size = new System.Drawing.Size(353, 37);
+            this.funcionarioLookup.TabIndex = 5;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(label3);
+            this.groupBox3.Controls.Add(this.maskedTextBox3);
+            this.groupBox3.Controls.Add(this.abono_pecuniarioCheckBox);
+            this.groupBox3.Controls.Add(this.maskedTextBox4);
+            this.groupBox3.Controls.Add(label4);
+            this.groupBox3.Location = new System.Drawing.Point(12, 139);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(440, 62);
+            this.groupBox3.TabIndex = 9;
+            this.groupBox3.TabStop = false;
+            // 
+            // maskedTextBox3
+            // 
+            this.maskedTextBox3.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feriasBindingSource, "inicio_abono", true));
+            this.maskedTextBox3.Location = new System.Drawing.Point(6, 38);
+            this.maskedTextBox3.Mask = "00/00/0000";
+            this.maskedTextBox3.Name = "maskedTextBox3";
+            this.maskedTextBox3.Size = new System.Drawing.Size(100, 20);
+            this.maskedTextBox3.TabIndex = 3;
+            // 
+            // maskedTextBox4
+            // 
+            this.maskedTextBox4.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.feriasBindingSource, "fim_abono", true));
+            this.maskedTextBox4.Location = new System.Drawing.Point(112, 38);
+            this.maskedTextBox4.Mask = "00/00/0000";
+            this.maskedTextBox4.Name = "maskedTextBox4";
+            this.maskedTextBox4.Size = new System.Drawing.Size(100, 20);
+            this.maskedTextBox4.TabIndex = 2;
             // 
             // frmFerias
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(468, 198);
-            this.Controls.Add(this.lookup1);
-            this.Controls.Add(this.abono_pecuniarioCheckBox);
+            this.ClientSize = new System.Drawing.Size(468, 223);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.funcionarioLookup);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "frmFerias";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Férias";
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.groupBox2, 0);
-            this.Controls.SetChildIndex(this.abono_pecuniarioCheckBox, 0);
-            this.Controls.SetChildIndex(this.lookup1, 0);
+            this.Controls.SetChildIndex(this.funcionarioLookup, 0);
+            this.Controls.SetChildIndex(this.groupBox3, 0);
             ((System.ComponentModel.ISupportInitialize)(this.feriasBindingSource)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,6 +265,9 @@
         private System.Windows.Forms.MaskedTextBox maskedTextBox1;
         private System.Windows.Forms.MaskedTextBox maskedTextBox2;
         private System.Windows.Forms.CheckBox abono_pecuniarioCheckBox;
-        private Lookup lookup1;
+        private Lookup funcionarioLookup;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox3;
+        private System.Windows.Forms.MaskedTextBox maskedTextBox4;
     }
 }

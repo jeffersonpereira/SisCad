@@ -40,6 +40,8 @@
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.funcionárioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dependenteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.usuárioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movimentaçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fériasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.movimentaçãoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,8 +52,10 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.labelHora = new System.Windows.Forms.ToolStripStatusLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -78,7 +82,9 @@
             this.setorToolStripMenuItem,
             this.toolStripMenuItem1,
             this.funcionárioToolStripMenuItem,
-            this.dependenteToolStripMenuItem});
+            this.dependenteToolStripMenuItem,
+            this.toolStripSeparator2,
+            this.usuárioToolStripMenuItem});
             this.cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
             this.cadastroToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
             this.cadastroToolStripMenuItem.Text = "Cadastro";
@@ -95,6 +101,7 @@
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(160, 22);
             this.toolStripMenuItem2.Text = "Responsável";
+            this.toolStripMenuItem2.Click += new System.EventHandler(this.toolStripMenuItem2_Click);
             // 
             // toolStripSeparator1
             // 
@@ -139,6 +146,19 @@
             this.dependenteToolStripMenuItem.Name = "dependenteToolStripMenuItem";
             this.dependenteToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
             this.dependenteToolStripMenuItem.Text = "Dependente";
+            this.dependenteToolStripMenuItem.Click += new System.EventHandler(this.dependenteToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(157, 6);
+            // 
+            // usuárioToolStripMenuItem
+            // 
+            this.usuárioToolStripMenuItem.Name = "usuárioToolStripMenuItem";
+            this.usuárioToolStripMenuItem.Size = new System.Drawing.Size(160, 22);
+            this.usuárioToolStripMenuItem.Text = "Usuário";
+            this.usuárioToolStripMenuItem.Click += new System.EventHandler(this.usuárioToolStripMenuItem_Click);
             // 
             // movimentaçãoToolStripMenuItem
             // 
@@ -176,6 +196,7 @@
             this.fichaFuncionalToolStripMenuItem.Name = "fichaFuncionalToolStripMenuItem";
             this.fichaFuncionalToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.fichaFuncionalToolStripMenuItem.Text = "Ficha Funcional";
+            this.fichaFuncionalToolStripMenuItem.Click += new System.EventHandler(this.fichaFuncionalToolStripMenuItem_Click);
             // 
             // mapaDeFériasToolStripMenuItem
             // 
@@ -210,21 +231,35 @@
             this.labelHora.Name = "labelHora";
             this.labelHora.Size = new System.Drawing.Size(0, 17);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::SisCad.Properties.Resources.logo_siscad1;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 24);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(756, 408);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            // 
             // frmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(756, 454);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "frmPrincipal";
             this.Text = "Sistema de Cadastro";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.frmPrincipal_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -253,6 +288,9 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel labelHora;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem usuárioToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

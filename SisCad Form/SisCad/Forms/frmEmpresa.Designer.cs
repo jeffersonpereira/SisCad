@@ -39,15 +39,14 @@
             this.empresaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.razao_socialTextBox = new System.Windows.Forms.TextBox();
             this.cnpjMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.enderecoTextBox = new System.Windows.Forms.TextBox();
             this.numeroTextBox = new System.Windows.Forms.TextBox();
             this.bairroTextBox = new System.Windows.Forms.TextBox();
             this.complementoTextBox = new System.Windows.Forms.TextBox();
             this.cepMaskedTextBox = new System.Windows.Forms.MaskedTextBox();
-            this.pesquisaMunicipio1 = new SisCad.Forms.PesquisaMunicipio();
-            this.lookup1 = new SisCad.Forms.Lookup();
+            this.gestorLookup = new SisCad.Forms.Lookup();
+            this.municipioLookup = new SisCad.Forms.Lookup();
+            this.loadPicture = new SisCad.Forms.LoadPicture();
             razao_socialLabel = new System.Windows.Forms.Label();
             cnpjLabel = new System.Windows.Forms.Label();
             enderecoLabel = new System.Windows.Forms.Label();
@@ -56,8 +55,6 @@
             complementoLabel = new System.Windows.Forms.Label();
             cepLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.empresaBindingSource)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // razao_socialLabel
@@ -125,7 +122,8 @@
             // 
             // empresaBindingSource
             // 
-            this.empresaBindingSource.DataSource = typeof(Data.Entidades.empresa);
+            this.empresaBindingSource.DataSource = typeof(Model.Data.empresa);
+            this.empresaBindingSource.DataSourceChanged += new System.EventHandler(this.empresaBindingSource_DataSourceChanged);
             // 
             // razao_socialTextBox
             // 
@@ -139,27 +137,11 @@
             // 
             this.cnpjMaskedTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.empresaBindingSource, "cnpj", true));
             this.cnpjMaskedTextBox.Location = new System.Drawing.Point(566, 55);
-            this.cnpjMaskedTextBox.Mask = "0.000.000/0000-00";
+            this.cnpjMaskedTextBox.Mask = "00.000.000/0000-00";
             this.cnpjMaskedTextBox.Name = "cnpjMaskedTextBox";
             this.cnpjMaskedTextBox.Size = new System.Drawing.Size(134, 20);
             this.cnpjMaskedTextBox.TabIndex = 4;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(12, 40);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(121, 153);
-            this.panel1.TabIndex = 5;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(121, 153);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.cnpjMaskedTextBox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
             // enderecoTextBox
             // 
@@ -201,28 +183,37 @@
             this.cepMaskedTextBox.Name = "cepMaskedTextBox";
             this.cepMaskedTextBox.Size = new System.Drawing.Size(74, 20);
             this.cepMaskedTextBox.TabIndex = 15;
+            this.cepMaskedTextBox.TextMaskFormat = System.Windows.Forms.MaskFormat.ExcludePromptAndLiterals;
             // 
-            // pesquisaMunicipio1
+            // gestorLookup
             // 
-            this.pesquisaMunicipio1.Location = new System.Drawing.Point(351, 112);
-            this.pesquisaMunicipio1.Name = "pesquisaMunicipio1";
-            this.pesquisaMunicipio1.Size = new System.Drawing.Size(293, 39);
-            this.pesquisaMunicipio1.TabIndex = 17;
+            this.gestorLookup.Location = new System.Drawing.Point(139, 156);
+            this.gestorLookup.Name = "gestorLookup";
+            this.gestorLookup.Size = new System.Drawing.Size(353, 37);
+            this.gestorLookup.TabIndex = 18;
             // 
-            // lookup1
+            // municipioLookup
             // 
-            this.lookup1.Location = new System.Drawing.Point(139, 156);
-            this.lookup1.Name = "lookup1";
-            this.lookup1.Size = new System.Drawing.Size(353, 37);
-            this.lookup1.TabIndex = 18;
+            this.municipioLookup.Location = new System.Drawing.Point(355, 113);
+            this.municipioLookup.Name = "municipioLookup";
+            this.municipioLookup.Size = new System.Drawing.Size(353, 37);
+            this.municipioLookup.TabIndex = 18;
+            // 
+            // loadPicture
+            // 
+            this.loadPicture.Location = new System.Drawing.Point(4, 39);
+            this.loadPicture.Name = "loadPicture";
+            this.loadPicture.Size = new System.Drawing.Size(126, 179);
+            this.loadPicture.TabIndex = 19;
             // 
             // frmEmpresa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(720, 236);
-            this.Controls.Add(this.lookup1);
-            this.Controls.Add(this.pesquisaMunicipio1);
+            this.Controls.Add(this.loadPicture);
+            this.Controls.Add(this.municipioLookup);
+            this.Controls.Add(this.gestorLookup);
             this.Controls.Add(cepLabel);
             this.Controls.Add(this.cepMaskedTextBox);
             this.Controls.Add(complementoLabel);
@@ -233,18 +224,17 @@
             this.Controls.Add(this.numeroTextBox);
             this.Controls.Add(enderecoLabel);
             this.Controls.Add(this.enderecoTextBox);
-            this.Controls.Add(this.panel1);
             this.Controls.Add(cnpjLabel);
             this.Controls.Add(this.cnpjMaskedTextBox);
             this.Controls.Add(razao_socialLabel);
             this.Controls.Add(this.razao_socialTextBox);
             this.Name = "frmEmpresa";
             this.Text = "Empresa";
+            this.Load += new System.EventHandler(this.frmEmpresa_Load);
             this.Controls.SetChildIndex(this.razao_socialTextBox, 0);
             this.Controls.SetChildIndex(razao_socialLabel, 0);
             this.Controls.SetChildIndex(this.cnpjMaskedTextBox, 0);
             this.Controls.SetChildIndex(cnpjLabel, 0);
-            this.Controls.SetChildIndex(this.panel1, 0);
             this.Controls.SetChildIndex(this.enderecoTextBox, 0);
             this.Controls.SetChildIndex(enderecoLabel, 0);
             this.Controls.SetChildIndex(this.numeroTextBox, 0);
@@ -255,11 +245,10 @@
             this.Controls.SetChildIndex(complementoLabel, 0);
             this.Controls.SetChildIndex(this.cepMaskedTextBox, 0);
             this.Controls.SetChildIndex(cepLabel, 0);
-            this.Controls.SetChildIndex(this.pesquisaMunicipio1, 0);
-            this.Controls.SetChildIndex(this.lookup1, 0);
+            this.Controls.SetChildIndex(this.gestorLookup, 0);
+            this.Controls.SetChildIndex(this.municipioLookup, 0);
+            this.Controls.SetChildIndex(this.loadPicture, 0);
             ((System.ComponentModel.ISupportInitialize)(this.empresaBindingSource)).EndInit();
-            this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,14 +259,13 @@
         private System.Windows.Forms.BindingSource empresaBindingSource;
         private System.Windows.Forms.TextBox razao_socialTextBox;
         private System.Windows.Forms.MaskedTextBox cnpjMaskedTextBox;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TextBox enderecoTextBox;
         private System.Windows.Forms.TextBox numeroTextBox;
         private System.Windows.Forms.TextBox bairroTextBox;
         private System.Windows.Forms.TextBox complementoTextBox;
         private System.Windows.Forms.MaskedTextBox cepMaskedTextBox;
-        private PesquisaMunicipio pesquisaMunicipio1;
-        private Lookup lookup1;
+        private Lookup gestorLookup;
+        private Lookup municipioLookup;
+        private LoadPicture loadPicture;
     }
 }

@@ -59,11 +59,11 @@
             // 
             // bindingSourceDepartamento
             // 
-            this.bindingSourceDepartamento.DataSource = typeof(Data.Entidades.departamento);
+            this.bindingSourceDepartamento.DataSource = typeof(Model.Data.departamento);
             // 
             // descricaoTextBox
             // 
-            this.descricaoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceDepartamento, "descricao", true));
+            this.descricaoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceDepartamento, "descricao", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.descricaoTextBox.Location = new System.Drawing.Point(87, 47);
             this.descricaoTextBox.Name = "descricaoTextBox";
             this.descricaoTextBox.Size = new System.Drawing.Size(387, 20);
@@ -71,7 +71,7 @@
             // 
             // codigoTextBox
             // 
-            this.codigoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceDepartamento, "codigo", true));
+            this.codigoTextBox.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bindingSourceDepartamento, "codigo", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.codigoTextBox.Location = new System.Drawing.Point(12, 47);
             this.codigoTextBox.Name = "codigoTextBox";
             this.codigoTextBox.Size = new System.Drawing.Size(69, 20);
@@ -89,6 +89,7 @@
             this.Name = "frmDepartamento";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Departamento";
+            this.Load += new System.EventHandler(this.frmDepartamento_Load);
             this.Controls.SetChildIndex(this.descricaoTextBox, 0);
             this.Controls.SetChildIndex(descricaoLabel, 0);
             this.Controls.SetChildIndex(this.codigoTextBox, 0);

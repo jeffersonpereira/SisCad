@@ -4,35 +4,33 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace Data.Entidades
+namespace Model.Data
 {
-    [MetadataType(typeof(Municipio_Metadata))]
-    public class municipio
+    public class municipio :  IValidade
     {
         public override string ToString()
         {
-            return string.Format("({0}{1})",this.uf,this.nome);
+            return string.Format("({0}){1}",this.uf,this.nome);
         }
+        [Key]
         public int municipio_id { get; set; }
+        [Required(ErrorMessage = "Campo Nome é obrigatório.")]
+        [Display(Name = "Nome")]
         public string nome { get; set; }
+        [Required(ErrorMessage = "Campo UF é obrigatório.")]
+        [Display(Name = "UF")]
+        [StringLength(2, ErrorMessage = "Tamanho máximo é de 2 caracteres.")]
         public string uf { get; set; }
         public virtual ICollection<empresa> empresa { get; set; }
         public virtual ICollection<funcionario> funcionario { get; set; }
         public virtual ICollection<funcionario> funcionario_naturalidade { get; set; }
-    }
 
-    public class Municipio_Metadata
-    {
-        [Key]
-        public int municipio_id { get; set; }
-
-        [Required(ErrorMessage="Campo Nome é obrigatório.")]
-        [Display(Name="Nome")]
-        public string nome { get; set; }
-
-        [Required(ErrorMessage = "Campo UF é obrigatório.")]
-        [Display(Name = "UF")]
-        [StringLength(2,ErrorMessage="Tamanho máximo é de 2 caracteres.")]
-        public string uf { get; set; }
+        public List<ValidationResult> GetValidationResult()
+        {
+            ValidationContext context = new ValidationContext(this, null, null);
+            List<ValidationResult> result = new List<ValidationResult>();
+            Validator.TryValidateObject(this, context, result);
+            return result;
+        }
     }
 }

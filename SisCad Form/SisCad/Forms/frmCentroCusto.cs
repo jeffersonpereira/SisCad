@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Data.Entidades;
+using Model.Data;
 
 namespace SisCad.Forms
 {
@@ -18,16 +18,16 @@ namespace SisCad.Forms
             Configure(this.centro_custoBindingSource);
         }
 
-        protected override void Inserir()
+        public override void DoPesquisa()
         {
-            centro_custo centro = this.centro_custoBindingSource.Current as centro_custo;
-            DataContext.AddToCentroCusto(centro);
-        }
-
-        protected override void Excluir()
-        {
-            centro_custo centro = this.centro_custoBindingSource.Current as centro_custo;
-            DataContext.centro_custo.AddObject(centro);
+            frmPesquisa form = new frmPesquisa();
+            form.Bind<centro_custo>(DataContext, new Search[] { 
+                new Search { Campo = "descricao", Tipo = typeof(string), Titulo = "Descrição" }, 
+                new Search { Campo = "codigo", Tipo = typeof(int), Titulo = "Código" } });
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                this.centro_custoBindingSource.DataSource = form.Selected;
+            }
         }
     }
 }

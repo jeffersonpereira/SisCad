@@ -6,3 +6,12 @@ D:\Códigos Fontes\SisCad\Entidades\bin\Debug\Entidades.dll
 D:\Códigos Fontes\SisCad\Entidades\bin\Debug\Entidades.pdb
 D:\Códigos Fontes\SisCad\Entidades\obj\Debug\Entidades.dll
 D:\Códigos Fontes\SisCad\Entidades\obj\Debug\Entidades.pdb
+I:\SisCad\Entidades\bin\Debug\Entidades.dll
+I:\SisCad\Entidades\bin\Debug\Entidades.pdb
+I:\SisCad\Entidades\obj\Debug\Entidades.dll
+I:\SisCad\Entidades\obj\Debug\Entidades.pdb
+D:\Sistemas\SisCad\Entidades\bin\Debug\Entidades.dll
+D:\Sistemas\SisCad\Entidades\bin\Debug\Entidades.pdb
+D:\Sistemas\SisCad\Entidades\obj\Debug\Entidades.dll
+D:\Sistemas\SisCad\Entidades\obj\Debug\Entidades.pdb
+D:\Sistemas\SisCad\Entidades\obj\Debug\Entidades.csprojResolveAssemblyReference.cache
