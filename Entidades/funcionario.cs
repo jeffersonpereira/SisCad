@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Objects.DataClasses;
-using System.Collections.Specialized;
 
 namespace Model.Data
 {
-    public partial class funcionario : IValidade
+    public partial class funcionario : classe_base
     {
         public funcionario()
         {
@@ -142,7 +138,7 @@ namespace Model.Data
         public string banco { get; set; }
         public int? agencia { get; set; }
 
-        [StringLength(1,ErrorMessage = "O campo Dígito Agência suporta no máximo é de 1 caracter.")]
+        [StringLength(1, ErrorMessage = "O campo Dígito Agência suporta no máximo é de 1 caracter.")]
         public string digito_agencia { get; set; }
         public int? numero_conta { get; set; }
         [StringLength(1, ErrorMessage = "O campo Dígito Conta suporta no máximo é de 1 caracter.")]
@@ -172,13 +168,5 @@ namespace Model.Data
             }
         }
 
-
-        public List<ValidationResult> GetValidationResult()
-        {
-            ValidationContext context = new ValidationContext(this, null, null);
-            List<ValidationResult> result = new List<ValidationResult>();
-            Validator.TryValidateObject(this, context, result);
-            return result;
-        }
     }
 }

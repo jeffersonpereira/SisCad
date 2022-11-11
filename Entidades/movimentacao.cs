@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 
 namespace Model.Data
 {
-    public partial class movimentacao : IValidade
+    public partial class movimentacao : classe_base
     {
         public movimentacao()
         {
@@ -31,13 +28,5 @@ namespace Model.Data
         [Required(ErrorMessage = "Campo Tipo de Movimentação é obrigatório")]
         [Display(Name = "Tipo de Movimentação")]
         public string tipo_movimentacao { get; set; }
-
-        public List<ValidationResult> GetValidationResult()
-        {
-            ValidationContext context = new ValidationContext(this, null, null);
-            List<ValidationResult> result = new List<ValidationResult>();
-            Validator.TryValidateObject(this, context, result);
-            return result;
-        }
     }
 }

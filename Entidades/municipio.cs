@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Model.Data
 {
-    public class municipio :  IValidade
+    public class municipio : classe_base
     {
         public override string ToString()
         {
-            return string.Format("({0}){1}",this.uf,this.nome);
+            return string.Format("({0}){1}", this.uf, this.nome);
         }
         [Key]
         public int municipio_id { get; set; }
@@ -25,12 +22,5 @@ namespace Model.Data
         public virtual ICollection<funcionario> funcionario { get; set; }
         public virtual ICollection<funcionario> funcionario_naturalidade { get; set; }
 
-        public List<ValidationResult> GetValidationResult()
-        {
-            ValidationContext context = new ValidationContext(this, null, null);
-            List<ValidationResult> result = new List<ValidationResult>();
-            Validator.TryValidateObject(this, context, result);
-            return result;
-        }
     }
 }

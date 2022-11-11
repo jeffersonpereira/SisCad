@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.IO;
-using System.Drawing;
 
 namespace Model.Data
 {
-    public partial class empresa : IValidade
+    public partial class empresa : classe_base
     {
         [Key]
         public int empresa_id { get; set; }
@@ -45,14 +39,6 @@ namespace Model.Data
                 img = System.Drawing.Image.FromStream(memory);
                 return img;
             }
-        }
-
-        public List<ValidationResult> GetValidationResult()
-        {
-            ValidationContext context = new ValidationContext(this, null, null);
-            List<ValidationResult> result = new List<ValidationResult>();
-            Validator.TryValidateObject(this, context, result);
-            return result;
         }
     }
 }

@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Model.Data
 {
-    public partial class centro_custo : IValidade
+    public partial class centro_custo : classe_base
     {
         public centro_custo()
         {
-            
+
         }
 
         public override string ToString()
@@ -26,13 +23,5 @@ namespace Model.Data
         [Display(Name = "Descrição")]
         public string descricao { get; set; }
         public ICollection<setor> setor { get; set; }
-
-        public List<ValidationResult> GetValidationResult()
-        {
-            ValidationContext context = new ValidationContext(this, null, null);
-            List<ValidationResult> result = new List<ValidationResult>();
-            Validator.TryValidateObject(this, context, result);
-            return result;
-        }
     }
 }

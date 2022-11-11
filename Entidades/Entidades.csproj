@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="cargo.cs" />
     <Compile Include="centro_custo.cs" />
+    <Compile Include="classe_base.cs" />
     <Compile Include="departamento.cs" />
     <Compile Include="dependente.cs" />
     <Compile Include="empresa.cs" />
@@ -70,7 +71,7 @@
     <Compile Include="funcionario.cs" />
     <Compile Include="gestor.cs" />
     <Compile Include="GlobalVar.cs" />
-    <Compile Include="IValidade.cs" />
+    <Compile Include="Interfaces\IValidade.cs" />
     <Compile Include="movimentacao.cs" />
     <Compile Include="municipio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

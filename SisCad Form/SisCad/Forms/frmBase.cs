@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Model.Data;
 using System.Data.Objects;
@@ -14,6 +9,12 @@ namespace SisCad
 
     public partial class frmBase : Form
     {
+        private bool Adiciona { get; set; }
+
+        public bool Adicao { get { return Adiciona; } }
+
+        protected object DataSource { get; set; }
+
         protected frmBase()
         {
             InitializeComponent();
@@ -27,7 +28,7 @@ namespace SisCad
             this.bindingSource = bindingSource;
             this.BindingNavigator.BindingSource = bindingSource;
             this.BindingNavigator.AddNewItem.Click += btnNovo_Click;
-            
+            Adiciona = false;
         }
 
         protected bool IsContext()
@@ -57,14 +58,14 @@ namespace SisCad
             }
         }
 
-        private void BindingSource_CurrentItemChanged(object sender,EventArgs e)
+        private void BindingSource_CurrentItemChanged(object sender, EventArgs e)
         {
             if (this.bindingSource.Current != null)
             {
                 dynamic entity = bindingSource.Current;
                 ObjectStateEntry obj;
                 /*Verifico se o objeto está no contexto*/
-                if (DataContext.ObjectStateManager.TryGetObjectStateEntry(entity,out obj))
+                if (DataContext.ObjectStateManager.TryGetObjectStateEntry(entity, out obj))
                 {
                     ObjectStateEntry entry = DataContext.ObjectStateManager.GetObjectStateEntry(entity);
                     if (entry.State != EntityState.Added)
@@ -80,9 +81,16 @@ namespace SisCad
         {
             this.bindingSource.AddNew();
             dynamic entity = this.bindingSource.Current;
-            DataContext.AddObject(entity.GetType().Name, this.bindingSource.Current);
+            try
+            {
+                DataContext.AddObject(entity.GetType().Name, this.bindingSource.Current);
+            }
+            catch
+            { DataContext.AddObject(ObjectContext.GetObjectType(entity.GetType()).Name, this.bindingSource.Current); }
+
             SetCodigo();
             HabilitarBotoes();
+            Adiciona = true;
         }
 
         private void SetCodigo()
@@ -121,7 +129,7 @@ namespace SisCad
         {
             dynamic entity = this.bindingSource.Current;
 
-            
+
             dynamic erros = entity.GetValidationResult();
             if (erros.Count == 0)
             {
@@ -135,7 +143,7 @@ namespace SisCad
             {
                 foreach (dynamic erro in erros)
                 {
-                    MessageBox.Show(erro.ErrorMessage,"Erro",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    MessageBox.Show(erro.ErrorMessage, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -146,15 +154,18 @@ namespace SisCad
             Close();
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
+        protected virtual void btnCancelar_Click(object sender, EventArgs e)
         {
-            this.bindingSource.CancelEdit();
+            if (!Adiciona)
+                this.bindingSource.CancelEdit();
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Deseja excluir o registro?", "Exclusão", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
             {
+                this.DataContext.DeleteObject(DataSource);
+
                 if (this.DataContext.SaveChanges() > 0)
                 {
                     MessageBox.Show("Registro excluído com sucesso.", "Exclusão", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -194,6 +205,6 @@ namespace SisCad
         }
 
         public virtual void DoPesquisa()
-        {}
+        { }
     }
 }

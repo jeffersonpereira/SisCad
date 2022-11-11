@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Model.Data
 {
-    public partial class setor : IValidade
+    public partial class setor : classe_base
     {
 
         public override string ToString()
@@ -33,13 +30,5 @@ namespace Model.Data
         [Display(Name = "Centro de Custo")]
         public centro_custo centro_custo { get; set; }
         public List<funcionario> funcionario { get; set; }
-
-        public List<ValidationResult> GetValidationResult()
-        {
-            ValidationContext context = new ValidationContext(this, null, null);
-            List<ValidationResult> result = new List<ValidationResult>();
-            Validator.TryValidateObject(this, context, result);
-            return result;
-        }
     }
 }

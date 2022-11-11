@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using Model.Data;
 
@@ -44,13 +38,14 @@ namespace SisCad.Forms
                         Application.Exit();
                     }
                     count++;
+                    this.MessageLabel.Text = "Login ou senha inválidos";
                 }
             }
             else
             {
                 if (string.IsNullOrWhiteSpace(loginTextBox.Text))
                 {
-                    MessageBox.Show("Login deve ser preenchido.","Aviso",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+                    MessageBox.Show("Login deve ser preenchido.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 if (string.IsNullOrWhiteSpace(senhaTextBox.Text))
                 {

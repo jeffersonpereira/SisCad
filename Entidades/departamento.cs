@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Model.Data
 {
-    public partial class departamento : IValidade
+    public partial class departamento : classe_base
     {
 
         public override string ToString()
@@ -26,12 +23,5 @@ namespace Model.Data
         public int empresa_id { get; set; }
         IList<setor> setor { get; set; }
 
-        public List<ValidationResult> GetValidationResult()
-        {
-            ValidationContext context = new ValidationContext(this, null, null);
-            List<ValidationResult> result = new List<ValidationResult>();
-            bool valid = Validator.TryValidateObject(this, context, result, true);
-            return result;
-        }
     }
 }

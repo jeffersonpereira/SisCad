@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 
 namespace Model.Data
 {
-    public class dependente : IValidade
+    public class dependente : classe_base
     {
         [Key]
         public int dependente_id { get; set; }
@@ -24,13 +21,5 @@ namespace Model.Data
         [Required(ErrorMessage = "Campo Funcionário é obrigatório.")]
         [Display(Name = "Funcionário")]
         public funcionario funcionario { get; set; }
-
-        public List<ValidationResult> GetValidationResult()
-        {
-            ValidationContext context = new ValidationContext(this, null, null);
-            List<ValidationResult> result = new List<ValidationResult>();
-            Validator.TryValidateObject(this, context, result);
-            return result;
-        }
     }
 }

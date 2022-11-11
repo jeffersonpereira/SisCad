@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel.DataAnnotations;
-
-namespace Model.Data
+﻿namespace Model.Data
 {
-    public class usuario : IValidade
+    public class usuario : classe_base
     {
         public int usuario_id { get; set; }
         public string nome { get; set; }
@@ -18,14 +12,6 @@ namespace Model.Data
         {
             get { return _senha; }
             set { senha = Security.GetHashMD5(value); }
-        }
-
-        public List<ValidationResult> GetValidationResult()
-        {
-            ValidationContext context = new ValidationContext(this, null, null);
-            List<ValidationResult> result = new List<ValidationResult>();
-            Validator.TryValidateObject(this, context, result);
-            return result;
         }
     }
 }
